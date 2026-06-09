@@ -1,0 +1,6 @@
+{
+  "env": "static",
+  "requiresSecrets": false,
+  "proxyConfigured": false,
+  "ready": true
+}

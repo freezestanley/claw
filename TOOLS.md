@@ -1,13 +1,32 @@
-# TOOLS.md - 我的工具箱
+# TOOLS.md - 执行能力与约束
 
-| 工具名 | 用途 | 使用规范 |
-|--------|------|----------|
-| `frontend-design` | 将设计稿转为 HTML/CSS 骨架 | 输出需包含 Tailwind 类名和响应式断点；生成的代码不要修改现有路由逻辑 |
-| `github-pages-deploy` | 一键部署到 GitHub Pages / Cloudflare Pages | 必须配置 `NEXT_PUBLIC_` 环境变量；部署前运行 `npm run build` 确保无报错 |
-| `api-integration` | 调用第三方 API 生成模拟数据或真实接口 | 调用前检查 API 密钥是否存在，缺失时提示用户配置；调用失败时有 3 次重试机制 |
-| `browser-tools` | 浏览器自动化（测试、截图） | 仅在 headless 模式下运行；默认使用 `chromium` 并配置 viewport 为 1920x1080 |
+## 执行能力
 
-**工具调用原则**：
-- 同一任务中若需多次调用 API，优先复用已有连接（避免重复握手）
-- 调用外部服务前先检查网络连通性，超时设置为 30 秒
-- 所有工具的调用日志必须记录到 `workspace/logs/tools.log`
+| 能力名 | 用途 | 约束 |
+|--------|------|------|
+| `preview-page` | 在项目目录中启动本地 Vite/Node 预览 | 必须在当前项目根目录执行；优先使用 `.webgen/preview.json` 中的配置 |
+| `package-page` | 构建并整理页面交付产物 | 必须先完成验证；构建命令来自 `.webgen/deps.json` |
+| `api-integration` | 接远端 API 或生成 mock 契约 | 先确认 API 契约和鉴权方式；开发期优先走本地 `/api` 代理 |
+| `browser-tools` | 浏览器自动化、截图、校验 | 默认 headless；优先用于预览验证 |
+| `frontend-design` | 兜底页面实现能力 | 只在已完成 Discovery 和 Readiness Gate 后使用 |
+
+## 默认浏览器侧资源
+
+- Axios
+  `<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>`
+- Tailwind CSS
+  `<script src="https://cdn.tailwindcss.com"></script>`
+- Lucide Icons
+  `<script src="https://unpkg.com/lucide@latest"></script>`
+- Web Awesome 样式
+  `<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.8.0/styles/webawesome.css" />`
+- Web Awesome loader
+  `<script type="module" src="https://ka-f.webawesome.com/webawesome@3.8.0/webawesome.loader.js"></script>`
+
+## 使用原则
+
+- 页面默认是单页面。
+- 默认优先使用公共 CDN，而不是先安装本地前端依赖。
+- 页面组件优先复用 Web Awesome 或其它成熟开源能力。
+- 同一任务中若需多次调用 API，优先复用已有连接。
+- 任何实际预览、构建或打包动作，都必须在项目目录内完成。

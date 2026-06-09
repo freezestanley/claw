@@ -1,0 +1,10 @@
+{
+  "slug": "elderly-pension-landing",
+  "name": "养老保险产品落地宣传页",
+  "template": "vite-page",
+  "pageMode": "single-page",
+  "status": "Ready",
+  "createdAt": "2026-06-09",
+  "stack": "vite-vanilla",
+  "static": true
+}
