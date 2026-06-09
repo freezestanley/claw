@@ -61,14 +61,8 @@ render_template "$POST_INIT_ROOT/DISCOVERY.md.tpl" "$PROJECT_ROOT/DISCOVERY.md"
 render_template "$POST_INIT_ROOT/ASSETS.md.tpl" "$PROJECT_ROOT/ASSETS.md"
 render_template "$POST_INIT_ROOT/API.md.tpl" "$PROJECT_ROOT/API.md"
 render_template "$POST_INIT_ROOT/HANDOFF.md.tpl" "$PROJECT_ROOT/HANDOFF.md"
+render_template "$POST_INIT_ROOT/config.json.tpl" "$WEBGEN_ROOT/config.json"
 
-render_template "$POST_INIT_ROOT/project.json.tpl" "$WEBGEN_ROOT/project.json"
-render_template "$POST_INIT_ROOT/deps.json.tpl" "$WEBGEN_ROOT/deps.json"
-render_template "$POST_INIT_ROOT/preview.json.tpl" "$WEBGEN_ROOT/preview.json"
-render_template "$POST_INIT_ROOT/apis.json.tpl" "$WEBGEN_ROOT/apis.json"
-render_template "$POST_INIT_ROOT/assets.json.tpl" "$WEBGEN_ROOT/assets.json"
-render_template "$POST_INIT_ROOT/env-status.json.tpl" "$WEBGEN_ROOT/env-status.json"
-
-node -e "const fs=require('fs'); const file=process.argv[1]; const data=JSON.parse(fs.readFileSync(file, 'utf8')); data.lastCheckedAt=new Date().toISOString(); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');" "$WEBGEN_ROOT/env-status.json"
+node -e "const fs=require('fs'); const file=process.argv[1]; const data=JSON.parse(fs.readFileSync(file, 'utf8')); data.envStatus.lastCheckedAt=new Date().toISOString(); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');" "$WEBGEN_ROOT/config.json"
 
 printf '%s\n' "$PROJECT_ROOT"

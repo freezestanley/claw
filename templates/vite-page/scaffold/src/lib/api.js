@@ -1,4 +1,4 @@
-function withFallbackBase(path: string) {
+function withFallbackBase(path) {
   if (path.startsWith("http://") || path.startsWith("https://")) {
     return path;
   }
@@ -6,20 +6,7 @@ function withFallbackBase(path: string) {
   return path.startsWith("/") ? path : `/${path}`;
 }
 
-declare global {
-  interface Window {
-    axios?: {
-      get: (url: string, config?: Record<string, unknown>) => Promise<unknown>;
-      post: (
-        url: string,
-        data?: unknown,
-        config?: Record<string, unknown>
-      ) => Promise<unknown>;
-    };
-  }
-}
-
-export async function apiGet(path: string, config: Record<string, unknown> = {}) {
+export async function apiGet(path, config = {}) {
   const url = withFallbackBase(path);
 
   if (window.axios?.get) {
@@ -34,11 +21,7 @@ export async function apiGet(path: string, config: Record<string, unknown> = {})
   return response;
 }
 
-export async function apiPost(
-  path: string,
-  data?: unknown,
-  config: Record<string, unknown> = {}
-) {
+export async function apiPost(path, data, config = {}) {
   const url = withFallbackBase(path);
 
   if (window.axios?.post) {

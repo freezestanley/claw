@@ -4,8 +4,8 @@
 
 | 能力名 | 用途 | 约束 |
 |--------|------|------|
-| `preview-page` | 在项目目录中启动本地 Vite/Node 预览 | 必须在当前项目根目录执行；优先使用 `.webgen/preview.json` 中的配置 |
-| `package-page` | 构建并整理页面交付产物 | 必须先完成验证；构建命令来自 `.webgen/deps.json` |
+| `preview-page` | 在项目目录中启动本地 Vite/Node 预览 | 必须在当前项目根目录执行；统一从 `.webgen/config.json` 读取配置 |
+| `package-page` | 构建并整理页面交付产物 | 必须先完成验证；构建命令来自 `.webgen/config.json` |
 | `api-integration` | 接远端 API 或生成 mock 契约 | 先确认 API 契约和鉴权方式；开发期优先走本地 `/api` 代理 |
 | `browser-tools` | 浏览器自动化、截图、校验 | 默认 headless；优先用于预览验证 |
 | `frontend-design` | 兜底页面实现能力 | 只在已完成 Discovery 和 Readiness Gate 后使用 |

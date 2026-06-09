@@ -26,10 +26,26 @@
 - `impeccable polish`
 - `impeccable adapt`
 - `impeccable harden`
+- `adapt`
 
 ## 兜底实现技能
 
 - `frontend-design`
+
+## 角色分工
+
+- `impeccable shape`
+  - 负责页面结构、视觉方向、信息层级和单页面组织方式
+- `impeccable adapt`
+  - 负责 `PC / Pad / H5` 的断点、重排、触控和 hover 替代策略
+- `impeccable harden`
+  - 负责弱网、空数据、错误态、长文本、素材异常等边界条件
+- `frontend-design`
+  - 负责将已经确认的设计方案实现为可运行代码
+- `impeccable audit`
+  - 负责响应式、可访问性、性能和一致性检查
+- `impeccable polish`
+  - 负责交付前的视觉与交互细节收尾
 
 ## 自定义技能占位
 
@@ -45,10 +61,14 @@
 1. `superpowers:brainstorming`
 2. Readiness Gate
 3. 复用决策
-3. `impeccable shape`
-4. 用户确认
-5. `frontend-design` 或模板内实现
-6. `superpowers:verification-before-completion`
+4. `impeccable shape`
+5. `impeccable adapt`
+6. `impeccable harden`
+7. 用户确认
+8. `frontend-design` 或模板内实现
+9. `impeccable audit`
+10. `impeccable polish`
+11. `superpowers:verification-before-completion`
 
 ### 页面迭代
 
@@ -65,9 +85,10 @@
 - `DISCOVERY.md` 已确认页面目标、结构和风格
 - `ASSETS.md` 已确认 logo、图片、品牌素材和占位策略
 - `API.md` 已确认接口、鉴权、返回结构和代理方式
-- `.webgen/preview.json` 已确认预览方式、端口和代理
-- `.webgen/deps.json` 已确认依赖命令
+- `.webgen/config.json` 已确认预览方式、端口、代理与依赖命令
 - 重要功能的复用/自定义实现决策已确认
+- 已确认 `PC / Pad / H5` 的适配目标和断点策略
+- 已确认触控、横竖屏、核心内容降级与 hover 替代策略
 
 ### Ready / Not Ready 判断
 
@@ -83,14 +104,18 @@
 3. APIs
 4. Preview
 5. Reuse Decision
-6. Design Confirmation
-7. Implementation
+6. Adaptation
+7. Design Confirmation
+8. Implementation
 
 ## 单页面约束
 
 - 默认输出必须是单页面项目
+- 默认输出必须是 JavaScript 项目
+- 页面入口、模块引用和配置文件默认都必须使用 `.js`
 - 默认不引入多页面路由
 - 更多功能优先在单页面内解决
+- 默认适配目标至少覆盖 `PC / Pad / H5`
 
 ## 复用优先规则
 

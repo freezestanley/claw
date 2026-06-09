@@ -5,7 +5,7 @@
 - `slug`：`demo-site`
 - 模板：`vite-page`
 - 模式：**单页面项目**
-- 技术栈：Vite + CDN 优先浏览器资源
+- 技术栈：Vite + JavaScript + CDN 优先浏览器资源
 
 ## 当前目标
 
@@ -18,6 +18,13 @@
 - API：待确认
 - Preview：待确认
 - Reuse Decision：待确认
+- Adaptation：待确认
+
+适配要求：
+
+- 至少覆盖 `PC / Pad / H5`
+- 页面实现前必须完成 `DISCOVERY.md` 中的适配检查清单
+- 如存在仅桌面可用的交互，必须在 Discovery 阶段显式记录替代方案
 
 ## Ready / Not Ready
 

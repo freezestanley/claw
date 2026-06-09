@@ -4,7 +4,7 @@
 
 **目标：** 将当前 WebGen workspace 改造成一个只在 OpenClaw 内运行的单页面生成 agent，具备模板驱动项目创建、Readiness Gate、本地 Vite/Node 预览、远端接口代理以及打包交付能力。
 
-**架构：** OpenClaw 继续作为 runtime 与 session 的唯一拥有者。workspace 负责提供单页面模板、项目文档、项目状态文件、辅助脚本与技能规则。对话和项目上下文主要存放在 Markdown 中，执行关键配置存放在 `.webgen/*.json` 中。
+**架构：** OpenClaw 继续作为 runtime 与 session 的唯一拥有者。workspace 负责提供单页面模板、项目文档、项目状态文件、辅助脚本与技能规则。对话和项目上下文主要存放在 Markdown 中，执行关键配置统一存放在 `.webgen/config.json` 中。
 
 **技术栈：** OpenClaw workspace 文件、Markdown、JSON、POSIX shell 脚本、Node/Vite 模板、可选的项目内 Python 工具，以及在合适场景下使用的公共 CDN：Axios、Tailwind CSS、Lucide、Web Awesome。
 
@@ -23,6 +23,8 @@
 
 - 保持 `一个 session = 一个项目`
 - 保持输出约束为单页面项目
+- 保持页面引用资源文件只允许 `.js`
+- 保持适配目标至少覆盖 `PC / Pad / H5`
 - 强制 `Discovery + Readiness Gate` 后才能进入最终生成
 - 强制所有文件操作只能在 `projects/<slug>/` 下进行
 - 规定 `PROJECT.md` 是项目恢复时的首要入口
@@ -49,6 +51,8 @@
 
 - 记录 superpowers 流程链
 - 记录 Impeccable 设计链
+- 记录 `adapt` 作为默认适配技能
+- 记录 `impeccable` 负责设计与校正、`frontend-design` 负责实现的职责边界
 - 记录 Readiness Gate
 - 记录复用优先规则
 - 记录 workspace 自定义 skill 占位
@@ -65,9 +69,9 @@ Expected：关键规则已出现在更新后的文档中。
 - 新建：`templates/vite-page/template.json`
 - 新建：`templates/vite-page/TEMPLATE.md`
 - 新建：`templates/vite-page/scaffold/package.json`
-- 新建：`templates/vite-page/scaffold/vite.config.ts`
+- 新建：`templates/vite-page/scaffold/vite.config.js`
 - 新建：`templates/vite-page/scaffold/.env.example`
-- 新建：`templates/vite-page/scaffold/src/lib/api.ts`
+- 新建：`templates/vite-page/scaffold/src/lib/api.js`
 - 新建：`templates/vite-page/scaffold/src/assets/placeholders/.gitkeep`
 - 新建：`templates/vite-page/scaffold/docs/api/.gitkeep`
 
@@ -85,10 +89,11 @@ Expected：关键规则已出现在更新后的文档中。
 
 **Step 3：搭建最小可预览的 Vite 单页面模板**
 
-- 在 `vite.config.ts` 中配置代理
-- 在 `src/lib/api.ts` 中提供统一请求层
+- 在 `vite.config.js` 中配置代理
+- 在 `src/lib/api.js` 中提供统一请求层
 - 保持单页面默认结构
 - 为 Axios、Tailwind CSS、Lucide、Web Awesome 的 CDN 使用预留位置
+- 明确禁止模板生成 `.ts` / `.tsx` 资源引用
 
 **Step 4：验证模板完整性**
 
@@ -109,12 +114,13 @@ Expected：模板文件齐全。
 **Step 1：创建通用 Markdown 模板**
 
 - 提供摘要、blocker、预览方式、readiness 状态等段落
+- 提供 `PC / Pad / H5` 的适配目标与断点策略段落
 
 **Step 2：在模板中引用 JSON 状态**
 
 - `PROJECT.md` 链接 `DISCOVERY.md`、`ASSETS.md`、`API.md`、`HANDOFF.md`
-- `ASSETS.md` 说明 `.webgen/assets.json`
-- `API.md` 说明 `.webgen/apis.json`
+- `ASSETS.md` 说明 `.webgen/config.json` 中的 `assets` 节点
+- `API.md` 说明 `.webgen/config.json` 中的 `apis` / `preview` 节点
 
 **Step 3：增强文档约束表达**
 
@@ -131,12 +137,7 @@ Expected：输出为清晰的人类可读项目骨架。
 ### Task 4：建立 `.webgen` 状态骨架
 
 **文件：**
-- 新建：`templates/vite-page/post-init/project.json.tpl`
-- 新建：`templates/vite-page/post-init/deps.json.tpl`
-- 新建：`templates/vite-page/post-init/preview.json.tpl`
-- 新建：`templates/vite-page/post-init/apis.json.tpl`
-- 新建：`templates/vite-page/post-init/assets.json.tpl`
-- 新建：`templates/vite-page/post-init/env-status.json.tpl`
+- 新建：`templates/vite-page/post-init/config.json.tpl`
 
 **Step 1：创建最小 JSON 模板**
 
@@ -144,15 +145,16 @@ Expected：输出为清晰的人类可读项目骨架。
 - 不重复冗长 Markdown 内容
 - 在项目元数据中加入单页面模式标记
 
-**Step 2：将 Readiness Gate 编码进 JSON**
+**Step 2：将 Readiness Gate 编码进 `config.json`**
 
-- `assets.json` 与 `apis.json` 必须包含 `blocking`
-- `preview.json` 必须包含 runtime、port、healthcheck、proxy
-- `deps.json` 必须包含 install/dev/build/preview/package 命令
+- `config.assets` 与 `config.apis` 必须包含 `blocking`
+- `config.preview` 必须包含 runtime、port、healthcheck、proxy
+- `config.adaptation` 必须包含 targets、breakpoints、orientation、interaction
+- `config.deps` 必须包含 install/dev/build/preview/package 命令
 
 **Step 3：验证 JSON 有效性**
 
-Run: `node -e "for (const f of process.argv.slice(1)) JSON.parse(require('fs').readFileSync(f, 'utf8')); console.log('ok')" templates/vite-page/post-init/project.json.tpl templates/vite-page/post-init/deps.json.tpl templates/vite-page/post-init/preview.json.tpl templates/vite-page/post-init/apis.json.tpl templates/vite-page/post-init/assets.json.tpl templates/vite-page/post-init/env-status.json.tpl`
+Run: `node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')); console.log('ok')" templates/vite-page/post-init/config.json.tpl`
 
 Expected：输出 `ok`
 
@@ -178,13 +180,13 @@ Expected：输出 `ok`
 
 **Step 3：实现 `project-preview.sh`**
 
-- 读取 `.webgen/preview.json` 与 `.webgen/deps.json`
+- 读取 `.webgen/config.json`
 - 在项目根目录启动本地 dev server
 - 检查本地健康检查地址
 
 **Step 4：实现 `project-package.sh`**
 
-- 读取 `.webgen/deps.json` 中的 build 命令
+- 读取 `.webgen/config.json` 中的 `deps.commands.build`
 - 收集产物路径
 - 输出交付说明
 
@@ -210,8 +212,20 @@ Expected：无输出，退出码为 0。
 - APIs
 - Preview
 - Reuse Decision
+- Adaptation
 - Design Confirmation
 - Implementation
+
+**Step 1.5：记录默认实战链**
+
+- `superpowers:brainstorming`
+- `impeccable shape`
+- `impeccable adapt`
+- `impeccable harden`
+- `frontend-design`
+- `impeccable audit`
+- `impeccable polish`
+- `superpowers:verification-before-completion`
 
 **Step 2：在 Markdown 模板中显式展示 blocker**
 
@@ -228,11 +242,10 @@ Expected：关键 gate 概念都已出现。
 ### Task 7：加入预览、代理与 CDN 默认值
 
 **文件：**
-- 修改：`templates/vite-page/scaffold/vite.config.ts`
-- 修改：`templates/vite-page/scaffold/src/lib/api.ts`
+- 修改：`templates/vite-page/scaffold/vite.config.js`
+- 修改：`templates/vite-page/scaffold/src/lib/api.js`
 - 修改：`templates/vite-page/scaffold/package.json`
-- 修改：`templates/vite-page/post-init/preview.json.tpl`
-- 修改：`templates/vite-page/post-init/apis.json.tpl`
+- 修改：`templates/vite-page/post-init/config.json.tpl`
 
 **Step 1：统一代理路径**
 
@@ -255,7 +268,7 @@ Expected：关键 gate 概念都已出现。
 
 **Step 4：验证模板具备预览与依赖默认值**
 
-Run: `rg -n "/api|proxy|target|healthcheck|axios|tailwindcss|lucide|webawesome" templates/vite-page/scaffold/vite.config.ts templates/vite-page/scaffold/src/lib/api.ts templates/vite-page/scaffold/package.json templates/vite-page/post-init/preview.json.tpl templates/vite-page/post-init/apis.json.tpl`
+Run: `rg -n "/api|proxy|target|healthcheck|axios|tailwindcss|lucide|webawesome|main\\.js|api\\.js|vite\\.config\\.js" templates/vite-page/scaffold/vite.config.js templates/vite-page/scaffold/src/lib/api.js templates/vite-page/scaffold/src/main.js templates/vite-page/scaffold/package.json templates/vite-page/post-init/config.json.tpl`
 
 Expected：代理和默认依赖约束都已出现。
 

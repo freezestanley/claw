@@ -12,6 +12,8 @@
 - 不再维护第二套 session 真相源。
 - 严格保持 `一个 session = 一个项目`。
 - 默认只创建单页面项目，除非未来明确修改 workspace 规范。
+- 项目页面中引用的资源文件、模块文件和配置文件默认均不得为 `.ts`，只能为 `.js`。
+- 页面必须适配 `PC / Pad / H5` 三类设备场景。
 - 所有文件和命令操作都必须限制在当前项目目录内。
 - 最终页面生成前必须通过 Readiness Gate。
 - 浏览器侧常见依赖优先使用稳定的公共 CDN。
@@ -96,12 +98,7 @@ webgen-workspace/
       API.md
       HANDOFF.md
       .webgen/
-        project.json
-        deps.json
-        preview.json
-        apis.json
-        assets.json
-        env-status.json
+        config.json
 ```
 
 ## 单页面项目约束
@@ -110,6 +107,8 @@ webgen-workspace/
 - 默认目标是可本地预览的单页面应用，或单个静态页面。
 - 默认不生成多页面路由结构。
 - 即使用户要更多功能，也优先保持在单页面内完成，除非未来显式修改 workspace 规则。
+- 页面引用的入口脚本、模块文件和配置文件必须使用 `.js`。
+- 页面布局和交互必须对 `PC / Pad / H5` 均可用。
 
 ## Markdown 与 JSON 的分层
 
@@ -157,43 +156,34 @@ webgen-workspace/
 
 ### 面向脚本执行与 Gate 判断的 JSON 状态
 
-`.webgen/project.json`
+`.webgen/config.json`
 
-- 项目 slug、名称、模板、技术栈、状态
-
-`.webgen/deps.json`
-
-- 包管理器
-- Node/Python 版本
-- install/dev/build/preview/package 命令
-
-`.webgen/preview.json`
-
-- 运行时类型
-- 本地端口
-- 健康检查地址
-- 远端 API 代理映射
-
-`.webgen/apis.json`
-
-- base URL
-- proxy prefix
-- 鉴权模式
-- endpoint 列表
-- 是否允许 mock
-- 是否阻塞生成
-
-`.webgen/assets.json`
-
-- 素材完整度
-- 必需图片
-- 是否允许 placeholder
-- 是否阻塞生成
-
-`.webgen/env-status.json`
-
-- 依赖安装状态
-- 最近检查、build、preview 时间
+- `project`
+  - 项目 slug、名称、模板、技术栈、语言、状态
+- `deps`
+  - 包管理器
+  - Node/Python 版本
+  - install/dev/build/preview/package 命令
+- `preview`
+  - 运行时类型
+  - 本地端口
+  - 健康检查地址
+  - 远端 API 代理映射
+- `apis`
+  - base URL
+  - proxy prefix
+  - 鉴权模式
+  - endpoint 列表
+  - 是否允许 mock
+  - 是否阻塞生成
+- `assets`
+  - 素材完整度
+  - 必需图片
+  - 是否允许 placeholder
+  - 是否阻塞生成
+- `envStatus`
+  - 依赖安装状态
+  - 最近检查、build、preview 时间
 
 ## CDN 与组件复用策略
 
@@ -245,10 +235,19 @@ webgen-workspace/
 - `impeccable polish`
 - `impeccable adapt`
 - `impeccable harden`
+- `adapt`
 
 ### 兜底实现技能
 
 - `frontend-design`
+
+### 设计与实现职责分层
+
+- `impeccable shape` 用于在实现前确定页面结构、视觉方向和信息层级。
+- `impeccable adapt` 用于在实现前明确 `PC / Pad / H5` 的适配策略，而不是在代码完成后被动补救。
+- `impeccable harden` 用于在实现前后补齐错误态、空态、弱网和异常素材等边界条件。
+- `frontend-design` 作为实现层，负责把已确认的设计和约束真正落成代码。
+- `impeccable audit` 与 `impeccable polish` 位于实现之后，分别承担质量审查和交付前收尾。
 
 ### 需要新增的 workspace 技能
 
@@ -267,17 +266,18 @@ webgen-workspace/
 ### 2. Discovery
 
 - 使用 `superpowers:brainstorming`。
-- 收集页面目标、目标用户、视觉方向、范围和主要结构。
+- 收集页面目标、目标用户、视觉方向、范围、主要结构，以及 `PC / Pad / H5` 的适配目标。
+- 收集 Pad 横竖屏要求、H5 首屏重点、hover 替代方式与触控热区要求。
 - 将结果写入 `DISCOVERY.md`。
 
 ### 3. Readiness Gate
 
 在以下内容确认前，不允许进入最终页面生成：
 
-- `ASSETS.md` 与 `.webgen/assets.json`
-- `API.md` 与 `.webgen/apis.json`
-- `.webgen/preview.json`
-- `.webgen/deps.json`
+- `ASSETS.md` 与 `.webgen/config.json` 的 `assets` 节点
+- `API.md` 与 `.webgen/config.json` 的 `apis` / `preview` 节点
+- `.webgen/config.json` 中的 `preview` 节点
+- `.webgen/config.json` 中的 `deps` 节点
 
 #### 素材准备
 
@@ -302,6 +302,14 @@ webgen-workspace/
 - 确认本地代理前缀，例如 `/api`
 - 确认远端代理目标
 
+#### 适配准备
+
+- 确认 `PC / Pad / H5` 的主要任务是否一致
+- 确认 Pad 是否要求横屏可用
+- 确认 H5 首屏保留哪些核心信息
+- 确认是否存在 hover 交互及其触控替代方案
+- 确认触控热区下限与小屏降级策略
+
 #### 复用决策
 
 - 确认页面所需功能是否已有可复用开源能力
@@ -310,17 +318,20 @@ webgen-workspace/
 
 ### 4. 页面设计
 
-- 在 Discovery 和 Readiness 完成后，使用 `impeccable shape` 整理页面方案。
+- 在 Discovery 和 Readiness 完成后，先使用 `impeccable shape` 整理页面方案。
+- 再使用 `impeccable adapt` 明确 `PC / Pad / H5` 的断点、重排和触控策略。
+- 必要时使用 `impeccable harden` 预先补齐边界条件。
 - 用户确认后，才进入实现。
 
 ### 5. 实现
 
 - 只允许在当前项目根目录内创建或修改文件。
 - 优先使用模板默认结构。
-- 使用 `.webgen/apis.json` 与 `.webgen/assets.json` 作为执行输入。
+- 使用 `.webgen/config.json` 中的 `apis` 与 `assets` 节点作为执行输入。
 - 最终交付必须保持为单页面。
 - 浏览器侧需求优先使用 Axios、Tailwind CSS、Lucide 和 Web Awesome 的 CDN 版本，除非当前模板明确要求打包依赖。
 - 任何功能实现优先复用已有开源工具或组件。
+- 实现阶段默认由 `frontend-design` 或模板内已有结构承接，而不是让设计技能直接替代编码。
 
 ### 6. 预览
 
@@ -331,7 +342,8 @@ webgen-workspace/
 
 ### 7. 验证与打包
 
-- 在完成前执行验证。
+- 在完成前优先执行 `impeccable audit` 与 `impeccable polish`。
+- 在声称完成前执行验证。
 - 构建生产产物。
 - 打包输出，并生成交付说明。
 
@@ -347,9 +359,9 @@ webgen-workspace/
 第一优先模板为 `vite-page`，应包含：
 
 - `package.json`
-- `vite.config.ts`
+- `vite.config.js`
 - `.env.example`
-- `src/lib/api.ts`
+- `src/lib/api.js`
 - `src/assets/placeholders/`
 - `docs/api/`
 

@@ -17,14 +17,12 @@ fi
 
 SLUG=$1
 PROJECT_ROOT=$(sh "$GUARD_SCRIPT" "$SLUG")
-PREVIEW_JSON="$PROJECT_ROOT/.webgen/preview.json"
-DEPS_JSON="$PROJECT_ROOT/.webgen/deps.json"
+CONFIG_JSON="$PROJECT_ROOT/.webgen/config.json"
 PID_FILE="$PROJECT_ROOT/.webgen/preview.pid"
 LOG_FILE="$PROJECT_ROOT/.webgen/preview.log"
-ENV_STATUS_JSON="$PROJECT_ROOT/.webgen/env-status.json"
 
-if [ ! -f "$PREVIEW_JSON" ] || [ ! -f "$DEPS_JSON" ]; then
-  echo "Missing preview or deps config under $PROJECT_ROOT/.webgen" >&2
+if [ ! -f "$CONFIG_JSON" ]; then
+  echo "Missing .webgen/config.json under $PROJECT_ROOT/.webgen" >&2
   exit 1
 fi
 
@@ -34,8 +32,8 @@ read_json_field() {
   node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync(process.argv[1], 'utf8')); const value=(function(){ return $expr; })(); if (value === undefined || value === null) process.exit(2); process.stdout.write(String(value));" "$file"
 }
 
-DEV_CMD=$(read_json_field "$DEPS_JSON" "data.commands.dev")
-HEALTHCHECK=$(read_json_field "$PREVIEW_JSON" "data.healthcheck")
+DEV_CMD=$(read_json_field "$CONFIG_JSON" "data.deps.commands.dev")
+HEALTHCHECK=$(read_json_field "$CONFIG_JSON" "data.preview.healthcheck")
 
 if [ -f "$PID_FILE" ]; then
   OLD_PID=$(cat "$PID_FILE")
@@ -55,9 +53,7 @@ fi
 attempt=0
 while [ "$attempt" -lt 20 ]; do
   if curl -fsS "$HEALTHCHECK" >/dev/null 2>&1; then
-    if [ -f "$ENV_STATUS_JSON" ]; then
-      node -e "const fs=require('fs'); const file=process.argv[1]; const data=JSON.parse(fs.readFileSync(file, 'utf8')); data.nodeInstalled=true; data.lastCheckedAt=new Date().toISOString(); data.lastPreviewAt=new Date().toISOString(); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');" "$ENV_STATUS_JSON"
-    fi
+    node -e "const fs=require('fs'); const file=process.argv[1]; const data=JSON.parse(fs.readFileSync(file, 'utf8')); data.envStatus.nodeInstalled=true; data.envStatus.lastCheckedAt=new Date().toISOString(); data.envStatus.lastPreviewAt=new Date().toISOString(); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');" "$CONFIG_JSON"
     printf 'Preview ready: %s\n' "$HEALTHCHECK"
     exit 0
   fi

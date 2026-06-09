@@ -1,8 +1,0 @@
-{
-  "slug": "demo-site",
-  "name": "demo site",
-  "template": "vite-page",
-  "stack": "vite-vanilla",
-  "pageMode": "single-page",
-  "status": "active"
-}
