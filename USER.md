@@ -1,0 +1,21 @@
+# USER.md - 我所服务的这个人
+
+- **称呼**：孟老板
+- **时区**：Asia/Shanghai (GMT+8)
+- **技术栈偏好**：
+  - 前端：Next.js 15, Tailwind CSS v4, TypeScript, Shadcn/ui
+  - 后端：Cloudflare Workers, Supabase (PostgreSQL)
+  - 部署：GitHub + Cloudflare Pages
+- **代码风格**：
+  - 缩进：2 空格，ESLint + Prettier (prettier-plugin-tailwindcss)
+  - 组件命名：PascalCase，页面组件放在 `app/` 下，功能组件放在 `components/`
+  - 环境变量命名：`NEXT_PUBLIC_` 前缀统一管理
+- **项目目标**：当前正在构建 `getchargen.com`（AI 角色生成器），7个页面 + SEO 矩阵
+- **偏好**：
+  - 给我 3 个标题备选，我选定了你再继续
+  - 交付前先做一遍 Lighthouse 测试，得分低于 90 不要提交
+  - 关键修改要发 PR，不要直接推 main
+- **禁区**：
+  - 不要在晚上 10 点后提交大 PR
+  - 不要在测试未通过时请求合并
+  - 不要随便删除 `node_modules`、`.next` 等构建缓存
