@@ -2,7 +2,7 @@
   "project": {
     "slug": "{{PROJECT_SLUG}}",
     "name": "{{PROJECT_NAME}}",
-    "template": "vite-page",
+    "template": "demo-site",
     "stack": "vite-vanilla",
     "language": "javascript",
     "pageMode": "single-page",

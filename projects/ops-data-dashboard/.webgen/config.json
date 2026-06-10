@@ -1,7 +1,7 @@
 {
   "project": {
-    "slug": "{{PROJECT_SLUG}}",
-    "name": "{{PROJECT_NAME}}",
+    "slug": "ops-data-dashboard",
+    "name": "运营数据 Dashboard",
     "template": "vite-page",
     "stack": "vite-vanilla",
     "language": "javascript",
@@ -24,9 +24,9 @@
     "runtime": "vite",
     "host": "127.0.0.1",
     "portBase": 4173,
-    "port": null,
+    "port": 4347,
     "entry": "/",
-    "healthcheck": null,
+    "healthcheck": "http://127.0.0.1:4347/",
     "proxy": {
       "/api": {
         "target": "https://api.example.com",
@@ -35,14 +35,14 @@
       }
     },
     "state": {
-      "status": "stopped",
-      "pid": null,
-      "startedAt": null,
-      "readyAt": null,
+      "status": "running",
+      "pid": 42224,
+      "startedAt": "2026-06-10T09:34:29.588Z",
+      "readyAt": "2026-06-10T09:34:30.768Z",
       "lastStoppedAt": null,
       "lastError": null
     },
-    "blocking": true
+    "blocking": false
   },
   "apis": {
     "baseUrl": "https://api.example.com",
@@ -51,20 +51,30 @@
       "type": "bearer",
       "source": "env"
     },
-    "endpoints": [],
-    "mockAllowed": false,
-    "blocking": true
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/dashboard/overview",
+        "status": "mock"
+      }
+    ],
+    "mockAllowed": true,
+    "blocking": false
   },
   "assets": {
     "logoProvided": false,
     "imagesRequired": [],
-    "allowPlaceholder": false,
+    "allowPlaceholder": true,
     "allowStock": false,
     "allowAiImage": false,
-    "blocking": true
+    "blocking": false
   },
   "adaptation": {
-    "targets": ["pc", "pad", "h5"],
+    "targets": [
+      "pc",
+      "pad",
+      "h5"
+    ],
     "breakpoints": {
       "h5Max": 767,
       "padMin": 768,
@@ -79,13 +89,13 @@
       "touchTargetMin": 44,
       "hoverDependentAllowed": false
     },
-    "blocking": true
+    "blocking": false
   },
   "envStatus": {
-    "nodeInstalled": false,
+    "nodeInstalled": true,
     "pythonInstalled": false,
-    "lastCheckedAt": null,
-    "lastPreviewAt": null,
+    "lastCheckedAt": "2026-06-10T09:34:30.768Z",
+    "lastPreviewAt": "2026-06-10T09:34:30.768Z",
     "lastBuildAt": null
   }
 }

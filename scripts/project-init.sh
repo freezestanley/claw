@@ -63,6 +63,32 @@ render_template "$POST_INIT_ROOT/API.md.tpl" "$PROJECT_ROOT/API.md"
 render_template "$POST_INIT_ROOT/HANDOFF.md.tpl" "$PROJECT_ROOT/HANDOFF.md"
 render_template "$POST_INIT_ROOT/config.json.tpl" "$WEBGEN_ROOT/config.json"
 
-node -e "const fs=require('fs'); const file=process.argv[1]; const data=JSON.parse(fs.readFileSync(file, 'utf8')); data.envStatus.lastCheckedAt=new Date().toISOString(); fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');" "$WEBGEN_ROOT/config.json"
+node - "$WEBGEN_ROOT/config.json" "$SLUG" <<'NODE'
+const fs = require("fs");
+
+const file = process.argv[2];
+const slug = process.argv[3];
+const data = JSON.parse(fs.readFileSync(file, "utf8"));
+
+const host = data.preview.host || "127.0.0.1";
+const basePort = Number(data.preview.portBase || 4173);
+const slugHash = [...slug].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+const port = basePort + (slugHash % 200);
+const entry = data.preview.entry || "/";
+
+data.preview.port = port;
+data.preview.healthcheck = `http://${host}:${port}${entry}`;
+data.preview.state = {
+  status: "stopped",
+  pid: null,
+  startedAt: null,
+  readyAt: null,
+  lastStoppedAt: null,
+  lastError: null
+};
+data.envStatus.lastCheckedAt = new Date().toISOString();
+
+fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
+NODE
 
 printf '%s\n' "$PROJECT_ROOT"

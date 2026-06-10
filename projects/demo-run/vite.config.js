@@ -9,7 +9,6 @@ export default defineConfig({
   server: {
     host,
     port,
-    strictPort: true,
     proxy: {
       "/api": {
         target: apiProxyTarget,
@@ -20,7 +19,6 @@ export default defineConfig({
   },
   preview: {
     host,
-    port,
-    strictPort: true
+    port
   }
 });

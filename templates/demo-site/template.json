@@ -1,0 +1,23 @@
+{
+  "id": "demo-site",
+  "name": "Demo Site Template",
+  "stack": "vite-vanilla",
+  "pageMode": "single-page",
+  "packageManager": "pnpm",
+  "defaultSkills": [
+    "superpowers:brainstorming",
+    "impeccable shape",
+    "impeccable adapt",
+    "impeccable harden",
+    "frontend-design",
+    "impeccable audit",
+    "impeccable polish",
+    "superpowers:verification-before-completion"
+  ],
+  "commands": {
+    "install": "pnpm install",
+    "dev": "pnpm dev",
+    "build": "pnpm build",
+    "preview": "pnpm preview"
+  }
+}
