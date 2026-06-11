@@ -1,0 +1,332 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111c34;
+  --panel-line: #1e293b;
+  --accent: #22d3ee;
+  --accent-2: #34d399;
+  --danger: #f43f5e;
+  --food: #fbbf24;
+  --text: #e2e8f0;
+  --muted: #64748b;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+#app {
+  min-height: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.game-shell {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 18px;
+}
+
+/* ---------- Header / HUD ---------- */
+.hud {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.hud-card {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hud-card .label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hud-card .value {
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.hud-card.score .value {
+  color: var(--accent);
+}
+.hud-card.best .value {
+  color: var(--accent-2);
+}
+
+/* ---------- Board ---------- */
+.board-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 22px;
+  padding: 12px;
+  box-shadow: 0 24px 60px -28px rgba(34, 211, 238, 0.45);
+}
+
+#board {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 12px;
+  background: #0b1426;
+  image-rendering: pixelated;
+}
+
+/* Overlay (start / pause / gameover) */
+.overlay {
+  position: absolute;
+  inset: 12px;
+  border-radius: 12px;
+  background: rgba(8, 15, 30, 0.82);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 24px;
+  transition: opacity 0.2s ease;
+}
+
+.overlay[hidden] {
+  display: none;
+}
+
+.overlay h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.overlay .sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 280px;
+  line-height: 1.6;
+}
+
+.overlay .final-score {
+  font-size: 18px;
+  color: var(--food);
+  font-weight: 700;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 999px;
+  padding: 13px 30px;
+  color: #06121f;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 12px 24px -10px rgba(34, 211, 238, 0.7);
+  transition: transform 0.08s ease, filter 0.15s ease;
+  min-height: 48px;
+}
+
+.btn:active {
+  transform: scale(0.96);
+  filter: brightness(1.05);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--panel-line);
+  box-shadow: none;
+}
+
+/* ---------- Controls ---------- */
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.control-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  gap: 8px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.dpad button {
+  appearance: none;
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+  color: var(--text);
+  border-radius: 16px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.06s ease;
+  user-select: none;
+}
+
+.dpad button:active {
+  background: #1b2a48;
+  transform: scale(0.94);
+}
+
+.dpad .up {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.dpad .left {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.dpad .center {
+  grid-area: 2 / 2 / 3 / 3;
+  background: transparent;
+  border-color: transparent;
+}
+.dpad .right {
+  grid-area: 2 / 3 / 3 / 4;
+}
+.dpad .down {
+  grid-area: 3 / 2 / 4 / 3;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+}
+
+.action-row .btn {
+  flex: 1;
+}
+
+.toggle-row {
+  display: flex;
+  gap: 8px;
+}
+
+.toggle {
+  flex: 1;
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 12px;
+  padding: 10px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 44px;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease,
+    transform 0.06s ease;
+  user-select: none;
+}
+
+.toggle:active {
+  transform: scale(0.95);
+}
+
+.toggle.on {
+  color: #06121f;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+}
+
+.hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ---------- Responsive: PC / Pad ---------- */
+@media (min-width: 768px) {
+  .game-shell {
+    max-width: 520px;
+  }
+  .hud-card .value {
+    font-size: 30px;
+  }
+  /* On pointer devices the keyboard is primary; keep d-pad but lighter */
+  .dpad button {
+    font-size: 24px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dpad button:hover {
+    background: #16233d;
+  }
+  .btn:hover {
+    filter: brightness(1.06);
+  }
+}
+
+/* Landscape phones: lay board + controls side by side */
+@media (max-height: 520px) and (orientation: landscape) {
+  .game-shell {
+    max-width: 760px;
+    flex-direction: row;
+    align-items: center;
+  }
+  .board-wrap {
+    max-width: 320px;
+  }
+  .side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 220px;
+  }
+  .dpad {
+    grid-template-columns: repeat(3, 56px);
+    grid-template-rows: repeat(3, 56px);
+  }
+}

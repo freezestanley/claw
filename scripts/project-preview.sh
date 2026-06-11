@@ -81,6 +81,23 @@ if [ -f "$PID_FILE" ]; then
   rm -f "$PID_FILE"
 fi
 
+# 预览数量门禁：启动新预览前检查总量，超阈则提示用户并阻止启动。
+# 设 WEBGEN_PREVIEW_GATE=0 可临时绕过（例如用户已确认继续）。
+if [ "${WEBGEN_PREVIEW_GATE:-1}" != "0" ]; then
+  GATE_OUT=$(zsh "$SCRIPT_DIR/preview-manager.sh" gate "$SLUG" 2>/dev/null) || GATE_RC=$?
+  if [ "${GATE_RC:-0}" -eq 10 ]; then
+    printf '%s\n' "$GATE_OUT"
+    echo ""
+    echo "如何恢复预览："
+    echo "  • 关单个：sh scripts/project-preview-stop.sh <slug>"
+    echo "  • 只保留当前：zsh scripts/preview-manager.sh stop-others $SLUG"
+    echo "  • 全部关闭：zsh scripts/preview-manager.sh stop-all"
+    echo "  • 重新预览该项目：sh scripts/project-preview.sh $SLUG  （或进项目目录 pnpm dev）"
+    echo "  • 确认后仍要启动（临时绕过门禁）：WEBGEN_PREVIEW_GATE=0 sh scripts/project-preview.sh $SLUG"
+    exit 10
+  fi
+fi
+
 port_offset=0
 while [ "$port_offset" -lt 20 ]; do
   PORT=$((START_PORT + port_offset))

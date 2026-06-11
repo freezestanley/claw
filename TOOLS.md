@@ -7,7 +7,7 @@
 | `preview-page` | 在项目目录中启动本地 Vite/Node 预览 | 必须在当前项目根目录执行；统一从 `.webgen/config.json` 读取配置 |
 | `package-page` | 构建并整理页面交付产物 | 必须先完成验证；构建命令来自 `.webgen/config.json` |
 | `api-integration` | 接远端 API 或生成 mock 契约 | 先确认 API 契约和鉴权方式；开发期优先走本地 `/api` 代理 |
-| `browser-tools` | 浏览器自动化、截图、校验 | 默认 headless；优先用于预览验证 |
+| `browser-tools` | 浏览器自动化、截图、校验 | **打开页面优先走 CDP（Chrome DevTools Protocol）**；优先复用已有 CDP 实例，否则用独立 user-data 目录启动带 `--remote-debugging-port` 的 Chrome；优先用于预览验证 |
 | `frontend-design` | 兜底页面实现能力 | 只在已完成 Discovery 和 Readiness Gate 后使用 |
 
 ## 默认浏览器侧资源
@@ -30,3 +30,5 @@
 - 页面组件优先复用 Web Awesome 或其它成熟开源能力。
 - 同一任务中若需多次调用 API，优先复用已有连接。
 - 任何实际预览、构建或打包动作，都必须在项目目录内完成。
+- **打开/预览页面默认优先使用 CDP 打开**：需要在浏览器中打开页面、截图或可视化校验时，优先通过 CDP 驱动 Chrome 打开，并做实地验证（DOM/响应状态/截图）；无 CDP 环境时才回退到 HTTP 健康检查并说明。
+- **开发完成后先追问再打包**：一轮开发完成并通过基本验证后，不自行进入 build，先追问用户“是否还有修改和调整”；仅在用户明确确认无修改（或显式要求“直接打包”）后才走 build 流程。详见 AGENTS.md「开发完成确认与构建流程」。

@@ -1,0 +1,64 @@
+{
+  "project": {
+    "slug": "women-fashion-store",
+    "name": "ÉLAN 伊岚 · 女装时尚网店首页",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "active"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4325,
+    "port": 4325,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4325/",
+    "proxy": {},
+    "state": {
+      "status": "running",
+      "port": 4325,
+      "startedAt": "2026-06-11T03:06:00.000Z",
+      "readyAt": "2026-06-11T03:06:01.000Z",
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": false
+  },
+  "apis": {
+    "baseUrl": null, "proxyPrefix": null,
+    "auth": { "type": "none", "source": null },
+    "endpoints": [], "mockAllowed": true, "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": true,
+    "allowStock": false,
+    "allowAiImage": false,
+    "blocking": false,
+    "note": "商品/分类图用内联 SVG 女装衣形插画(连衣裙/上衣/外套/裤装/半裙)占位，待真实产品图替换；不使用人像或珠宝插画"
+  },
+  "adaptation": {
+    "targets": ["pc", "pad", "h5"],
+    "breakpoints": { "h5Max": 767, "padMin": 768, "padMax": 1023, "pcMin": 1024 },
+    "orientations": { "padLandscapeRequired": true, "h5LandscapeRequired": false },
+    "interaction": { "touchTargetMin": 44, "hoverDependentAllowed": false },
+    "blocking": false
+  },
+  "envStatus": {
+    "nodeInstalled": true, "pythonInstalled": false,
+    "lastCheckedAt": null, "lastPreviewAt": null, "lastBuildAt": null
+  }
+}

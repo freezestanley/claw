@@ -1,0 +1,70 @@
+{
+  "project": {
+    "slug": "womens-fashion-store",
+    "name": "MAISON LÉA 蕾雅 · 女装网店首页",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "active"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4323,
+    "port": 4323,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4323/",
+    "proxy": {},
+    "state": {
+      "status": "running",
+      "port": 4323,
+      "startedAt": "2026-06-11T02:53:00.000Z",
+      "readyAt": "2026-06-11T02:53:01.000Z",
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": false
+  },
+  "apis": {
+    "baseUrl": null,
+    "proxyPrefix": null,
+    "auth": { "type": "none", "source": null },
+    "endpoints": [],
+    "mockAllowed": true,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": true,
+    "allowStock": false,
+    "allowAiImage": false,
+    "blocking": false,
+    "note": "商品/分类图用内联 SVG 时装插画占位，待用户提供真实产品图替换"
+  },
+  "adaptation": {
+    "targets": ["pc", "pad", "h5"],
+    "breakpoints": { "h5Max": 767, "padMin": 768, "padMax": 1023, "pcMin": 1024 },
+    "orientations": { "padLandscapeRequired": true, "h5LandscapeRequired": false },
+    "interaction": { "touchTargetMin": 44, "hoverDependentAllowed": false },
+    "blocking": false
+  },
+  "envStatus": {
+    "nodeInstalled": true,
+    "pythonInstalled": false,
+    "lastCheckedAt": null,
+    "lastPreviewAt": null,
+    "lastBuildAt": null
+  }
+}

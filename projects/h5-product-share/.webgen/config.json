@@ -1,0 +1,106 @@
+{
+  "project": {
+    "slug": "h5-product-share",
+    "name": "H5 产品分享页 · 无界耳机 Pro",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "active"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "python": "3.11",
+    "pythonEnv": ".venv",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4173,
+    "port": 4320,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4320/",
+    "proxy": {
+      "/api": {
+        "target": "https://api.example.com",
+        "changeOrigin": true,
+        "secure": true
+      }
+    },
+    "state": {
+      "status": "running",
+      "pid": 15605,
+      "startedAt": "2026-06-10T12:35:01.879Z",
+      "readyAt": "2026-06-10T12:35:03.034Z",
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": false
+  },
+  "apis": {
+    "baseUrl": "https://api.example.com",
+    "proxyPrefix": "/api",
+    "auth": {
+      "type": "bearer",
+      "source": "env"
+    },
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/api/product/:id",
+        "status": "mock"
+      },
+      {
+        "method": "POST",
+        "path": "/api/order",
+        "status": "optional-mock"
+      }
+    ],
+    "mockAllowed": true,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": true,
+    "allowStock": false,
+    "allowAiImage": false,
+    "blocking": false
+  },
+  "adaptation": {
+    "targets": [
+      "pc",
+      "pad",
+      "h5"
+    ],
+    "breakpoints": {
+      "h5Max": 767,
+      "padMin": 768,
+      "padMax": 1023,
+      "pcMin": 1024
+    },
+    "orientations": {
+      "padLandscapeRequired": true,
+      "h5LandscapeRequired": false
+    },
+    "interaction": {
+      "touchTargetMin": 44,
+      "hoverDependentAllowed": false
+    },
+    "blocking": false
+  },
+  "envStatus": {
+    "nodeInstalled": true,
+    "pythonInstalled": false,
+    "lastCheckedAt": "2026-06-10T12:35:03.034Z",
+    "lastPreviewAt": "2026-06-10T12:35:03.034Z",
+    "lastBuildAt": null
+  }
+}

@@ -1,0 +1,128 @@
+:root {
+  --ivory: #faf7f2;
+  --cream: #f3ece1;
+  --champagne: #c8a96a;
+  --champagne-deep: #a8854a;
+  --ink: #2c2620;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+/* 香槟金渐变文字 */
+.text-gold-gradient {
+  background: linear-gradient(120deg, #d8bd86 0%, #c8a96a 40%, #a8854a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 细金线分隔 */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(200, 169, 106, 0.6),
+    transparent
+  );
+}
+
+/* 卡片悬浮 */
+.ring-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease;
+}
+.ring-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px -28px rgba(168, 133, 74, 0.45);
+}
+@media (hover: none) {
+  .ring-card:active {
+    transform: translateY(-4px);
+  }
+}
+
+/* 入场动画 */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* 微光浮动的戒指主视觉 */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2deg);
+  }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.35;
+  }
+}
+.shimmer {
+  animation: shimmer 3.5s ease-in-out infinite;
+}
+
+/* 导航毛玻璃 */
+.nav-blur {
+  background: rgba(250, 247, 242, 0.72);
+  backdrop-filter: saturate(180%) blur(14px);
+}
+
+/* 按钮 */
+.btn-gold {
+  background: linear-gradient(120deg, #d8bd86, #c8a96a 55%, #a8854a);
+  color: #fff;
+  transition: filter 0.25s ease, transform 0.1s ease, box-shadow 0.3s ease;
+  box-shadow: 0 14px 30px -14px rgba(168, 133, 74, 0.65);
+}
+.btn-gold:hover {
+  filter: brightness(1.05);
+}
+.btn-gold:active {
+  transform: scale(0.97);
+}
+
+.btn-outline {
+  border: 1px solid rgba(168, 133, 74, 0.5);
+  color: var(--champagne-deep);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn-outline:hover {
+  background: rgba(200, 169, 106, 0.1);
+}
+
+/* 文字间距 — 高级感 */
+.tracking-luxe {
+  letter-spacing: 0.32em;
+}

@@ -1,0 +1,5 @@
+node_modules
+dist
+.webgen/preview.log
+.webgen/preview.pid
+.DS_Store
