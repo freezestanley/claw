@@ -1,0 +1,15 @@
+{
+  "name": "user-list-table",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 4380 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --port 4380 --strictPort"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "ws": "^8.21.0"
+  }
+}

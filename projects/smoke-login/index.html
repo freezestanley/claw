@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>登录 · Sign in</title>
+  <style>
+    :root {
+      --bg-1: #eef4ff;
+      --bg-2: #f7fbff;
+      --ink: #1f2a44;
+      --muted: #6b7894;
+      --line: #e2e9f5;
+      --brand: #2f7df6;
+      --brand-deep: #1f5fd1;
+      --ok: #2ba776;
+      --err: #e0556b;
+      --shadow: 0 18px 50px -20px rgba(47, 125, 246, .35);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 600px at 12% -10%, #dbe8ff 0%, transparent 55%),
+        radial-gradient(900px 500px at 110% 10%, #e6fbf3 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-2), var(--bg-1));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 380px;
+      background: rgba(255, 255, 255, .82);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 36px 30px 30px;
+      animation: rise .5s cubic-bezier(.2, .8, .2, 1) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .logo {
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--brand), #59c8ff);
+      display: grid; place-items: center;
+      color: #fff; font-weight: 700; font-size: 18px;
+      box-shadow: 0 8px 18px -8px rgba(47, 125, 246, .7);
+    }
+    h1 { font-size: 20px; margin: 0; letter-spacing: .2px; }
+    .sub { color: var(--muted); font-size: 13px; margin: 4px 0 0; }
+    .field { margin-top: 18px; }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 7px; }
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: var(--ink);
+      border: 1.5px solid var(--line);
+      border-radius: 11px;
+      background: #fff;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s;
+    }
+    input:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(47, 125, 246, .14);
+    }
+    input.invalid { border-color: var(--err); box-shadow: 0 0 0 4px rgba(224, 85, 107, .12); }
+    .hint { min-height: 16px; font-size: 12px; color: var(--err); margin-top: 6px; }
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-deep));
+      cursor: pointer;
+      transition: transform .12s, box-shadow .2s, opacity .2s;
+      box-shadow: 0 12px 24px -12px rgba(47, 125, 246, .8);
+    }
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+    .row-forgot {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    .link-forgot {
+      background: none;
+      border: none;
+      padding: 4px 2px;
+      margin: 0;
+      width: auto;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brand);
+      cursor: pointer;
+      box-shadow: none;
+      transition: color .18s;
+    }
+    .link-forgot:hover { color: var(--brand-deep); transform: none; text-decoration: underline; }
+    .link-forgot:active { transform: none; }
+    .toast {
+      position: fixed;
+      top: 26px; left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: var(--ok);
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 14px; font-weight: 600;
+      box-shadow: 0 14px 30px -12px rgba(43, 167, 118, .7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+      z-index: 9;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 18px; }
+    @media (max-width: 420px) {
+      .card { padding: 28px 20px 24px; border-radius: 16px; }
+      h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toast" id="toast">✅ 登录成功</div>
+
+  <form class="card" id="loginForm" novalidate>
+    <div class="brand">
+      <div class="logo">W</div>
+      <div>
+        <h1>欢迎回来</h1>
+        <p class="sub">登录以继续使用</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="username">用户名</label>
+      <input id="username" name="username" type="text" autocomplete="username" placeholder="请输入用户名" />
+      <div class="hint" id="hint-username"></div>
+    </div>
+
+    <div class="field">
+      <label for="password">密码</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码" />
+      <div class="hint" id="hint-password"></div>
+    </div>
+
+    <div class="row-forgot">
+      <button type="button" class="link-forgot" id="forgotBtn">忘记密码？</button>
+    </div>
+
+    <button type="submit">登 录</button>
+    <p class="foot">冒烟测试页 · 前端模拟登录</p>
+  </form>
+
+  <script>
+    var form = document.getElementById('loginForm');
+    var toast = document.getElementById('toast');
+
+    function setError(id, msg) {
+      var input = document.getElementById(id);
+      var hint = document.getElementById('hint-' + id);
+      hint.textContent = msg || '';
+      input.classList.toggle('invalid', !!msg);
+    }
+
+    function showToast(msg) {
+      if (msg) toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(function () { toast.classList.remove('show'); }, 2200);
+    }
+
+    document.getElementById('forgotBtn').addEventListener('click', function () {
+      showToast('📧 重置链接已发送至您的邮箱');
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var u = document.getElementById('username').value.trim();
+      var p = document.getElementById('password').value.trim();
+      var ok = true;
+
+      if (!u) { setError('username', '用户名不能为空'); ok = false; } else { setError('username', ''); }
+      if (!p) { setError('password', '密码不能为空'); ok = false; } else { setError('password', ''); }
+
+      if (ok) showToast('✅ 登录成功');
+    });
+
+    // 输入时清除该字段错误
+    ['username', 'password'].forEach(function (id) {
+      document.getElementById(id).addEventListener('input', function () {
+        if (this.value.trim()) setError(id, '');
+      });
+    });
+  </script>
+</body>
+</html>

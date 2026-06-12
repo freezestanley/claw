@@ -1,0 +1,6 @@
+node_modules
+dist
+dist.zip
+.webgen/preview.log
+.webgen/preview.pid
+*.local

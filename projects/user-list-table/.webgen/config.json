@@ -1,0 +1,6 @@
+{
+  "preview": { "tool": "vite", "port": 4380, "entry": "index.html" },
+  "build": { "command": "npm run build", "outDir": "dist" },
+  "proxy": { "/api": "http://localhost:3000" },
+  "install": "npm install"
+}
