@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>死神来了4 · FINAL DESTINATION 4｜死亡早已为你排好顺序</title>
+    <meta name="description" content="恐怖电影《死神来了4》官方宣传站。2026 万圣节档 10/31 上映。死亡早已为你排好顺序。R级 / 16+。" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --ink: #070708;
+        --ink-2: #0c0c0e;
+        --blood: #8b0000;
+        --crimson: #c81212;
+        --crimson-2: #e11d1d;
+        --ash: #9aa0a6;
+        --bone: #d9d4cc;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--ink);
+        color: var(--bone);
+        font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+        overflow-x: hidden;
+      }
+      .serif {
+        font-family: "Songti SC", "STSong", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+      }
+      .mono { font-family: "SF Mono", "Roboto Mono", ui-monospace, "Courier New", monospace; }
+
+      /* 噪点颗粒 */
+      .grain::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        pointer-events: none;
+        opacity: 0.06;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        animation: grainShift 0.6s steps(2) infinite;
+      }
+      @keyframes grainShift {
+        0% { transform: translate(0,0); }
+        100% { transform: translate(-3%, 2%); }
+      }
+
+      .blood-text {
+        color: var(--bone);
+        text-shadow: 0 0 18px rgba(200,18,18,0.35), 0 2px 0 rgba(0,0,0,0.6);
+      }
+      .crimson-glow { text-shadow: 0 0 14px rgba(225,29,29,0.55); }
+
+      /* 入场动画 */
+      .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+      .reveal.in { opacity: 1; transform: none; }
+
+      /* 血滴下落 */
+      @keyframes drip {
+        0% { transform: translateY(-6px) scaleY(0.6); opacity: 0; }
+        20% { opacity: 1; }
+        100% { transform: translateY(120px) scaleY(1.4); opacity: 0; }
+      }
+      .drip { animation: drip 4.5s ease-in infinite; }
+
+      @keyframes pulse-crimson {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(200,18,18,0.55); }
+        50% { box-shadow: 0 0 0 14px rgba(200,18,18,0); }
+      }
+      .cta-pulse { animation: pulse-crimson 2.4s ease-out infinite; }
+
+      .hairline { border-color: rgba(154,160,166,0.14); }
+      .card-edge { background: linear-gradient(180deg, rgba(20,20,22,0.9), rgba(8,8,9,0.95)); }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .grain::before, .drip, .cta-pulse { animation: none !important; }
+        .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body class="grain antialiased">
+    <!-- ============ 顶部导航 ============ -->
+    <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-sm bg-black/40 border-b hairline">
+      <nav class="mx-auto max-w-7xl px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+        <a href="#hero" class="serif text-lg sm:text-xl tracking-[0.25em] text-bone crimson-glow">死神来了<span class="text-[var(--crimson-2)]">4</span></a>
+        <ul class="hidden md:flex items-center gap-7 text-sm text-[var(--ash)]">
+          <li><a href="#story" class="hover:text-[var(--crimson-2)] transition">剧情</a></li>
+          <li><a href="#cast" class="hover:text-[var(--crimson-2)] transition">角色</a></li>
+          <li><a href="#trailer" class="hover:text-[var(--crimson-2)] transition">预告</a></li>
+          <li><a href="#gallery" class="hover:text-[var(--crimson-2)] transition">剧照</a></li>
+          <li><a href="#release" class="hover:text-[var(--crimson-2)] transition">上映</a></li>
+        </ul>
+        <a href="#release" class="min-h-[44px] inline-flex items-center px-4 sm:px-5 text-sm font-medium tracking-wider text-white bg-[var(--blood)] hover:bg-[var(--crimson)] transition rounded-sm">购票 / 预约</a>
+      </nav>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="relative min-h-[100svh] flex items-center overflow-hidden pt-14 sm:pt-16">
+      <!-- 背景层：径向血渍 + 裂痕 -->
+      <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0" style="background:
+          radial-gradient(60% 50% at 50% 18%, rgba(139,0,0,0.28), transparent 70%),
+          radial-gradient(40% 35% at 80% 80%, rgba(120,12,12,0.18), transparent 70%),
+          linear-gradient(180deg, #0a0a0c 0%, #050506 100%);"></div>
+        <svg class="absolute inset-0 w-full h-full opacity-[0.22]" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <g stroke="#1c1c1f" stroke-width="1.4" fill="none">
+            <path d="M600 -20 L590 180 L640 360 L560 520 L620 760"/>
+            <path d="M590 180 L420 240 M640 360 L820 300 M560 520 L380 560 M560 520 L760 600"/>
+            <path d="M620 760 L500 700 M620 760 L740 690"/>
+          </g>
+        </svg>
+        <!-- 血滴 -->
+        <div class="absolute left-1/2 top-[42%] -translate-x-1/2 w-px h-24">
+          <span class="drip absolute left-0 top-0 block w-[3px] h-4 rounded-b-full bg-[var(--crimson)]"></span>
+          <span class="drip absolute left-2 top-0 block w-[2px] h-3 rounded-b-full bg-[var(--blood)]" style="animation-delay:1.6s"></span>
+          <span class="drip absolute -left-3 top-0 block w-[2px] h-3 rounded-b-full bg-[var(--blood)]" style="animation-delay:3s"></span>
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-7xl w-full px-5 sm:px-8">
+        <div class="max-w-3xl">
+          <p class="reveal mono text-[var(--crimson-2)] tracking-[0.45em] text-xs sm:text-sm mb-5">FINAL&nbsp;DESTINATION&nbsp;IV</p>
+          <h1 class="reveal serif blood-text font-bold leading-[0.95] text-[clamp(3.2rem,12vw,9rem)] tracking-tight">
+            死神<br class="sm:hidden"/>来了<span class="text-[var(--crimson-2)] crimson-glow">4</span>
+          </h1>
+          <p class="reveal serif mt-6 text-[clamp(1.2rem,3.6vw,2.1rem)] text-[var(--ash)] tracking-wide">
+            死亡早已为你<span class="text-[var(--crimson-2)] crimson-glow">排好顺序</span>
+          </p>
+
+          <!-- 上映 + 倒计时 -->
+          <div class="reveal mt-10">
+            <div class="flex items-center gap-3 text-[var(--ash)] text-sm tracking-widest mb-4">
+              <span class="inline-block w-8 h-px bg-[var(--blood)]"></span>
+              <span id="release-label">2026 万圣节档 · 10/31 上映</span>
+            </div>
+            <div id="countdown" class="flex flex-wrap gap-3 sm:gap-4" aria-label="距上映倒计时">
+              <div class="card-edge border hairline rounded-sm px-4 sm:px-6 py-3 min-w-[72px] text-center">
+                <div class="mono text-3xl sm:text-5xl font-bold text-white crimson-glow" data-cd="days">--</div>
+                <div class="text-[10px] sm:text-xs text-[var(--ash)] tracking-[0.3em] mt-1">天</div>
+              </div>
+              <div class="card-edge border hairline rounded-sm px-4 sm:px-6 py-3 min-w-[72px] text-center">
+                <div class="mono text-3xl sm:text-5xl font-bold text-white crimson-glow" data-cd="hours">--</div>
+                <div class="text-[10px] sm:text-xs text-[var(--ash)] tracking-[0.3em] mt-1">时</div>
+              </div>
+              <div class="card-edge border hairline rounded-sm px-4 sm:px-6 py-3 min-w-[72px] text-center">
+                <div class="mono text-3xl sm:text-5xl font-bold text-white crimson-glow" data-cd="minutes">--</div>
+                <div class="text-[10px] sm:text-xs text-[var(--ash)] tracking-[0.3em] mt-1">分</div>
+              </div>
+              <div class="card-edge border hairline rounded-sm px-4 sm:px-6 py-3 min-w-[72px] text-center">
+                <div class="mono text-3xl sm:text-5xl font-bold text-[var(--crimson-2)] crimson-glow" data-cd="seconds">--</div>
+                <div class="text-[10px] sm:text-xs text-[var(--ash)] tracking-[0.3em] mt-1">秒</div>
+              </div>
+            </div>
+            <p id="cd-note" class="mono text-xs text-[var(--ash)]/70 mt-4 tracking-widest">— 没有人能逃过名单上的顺序 —</p>
+          </div>
+        </div>
+      </div>
+      <a href="#story" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-[var(--ash)]/60 text-xs tracking-[0.3em] animate-bounce" aria-hidden="true">下滑 ↓</a>
+    </section>
+    <!-- ============ 剧情简介 ============ -->
+    <section id="story" class="relative py-24 sm:py-32 border-t hairline">
+      <div class="mx-auto max-w-5xl px-5 sm:px-8">
+        <div class="reveal flex items-center gap-3 mb-8">
+          <span class="mono text-[var(--crimson-2)] text-xs tracking-[0.4em]">01 / 剧情</span>
+          <span class="flex-1 h-px bg-gradient-to-r from-[var(--blood)]/60 to-transparent"></span>
+        </div>
+        <h2 class="reveal serif text-3xl sm:text-5xl leading-tight mb-8">一场被提前看见的灾难，<br class="hidden sm:block"/>只是死神计划的开场。</h2>
+        <div class="reveal grid sm:grid-cols-3 gap-8 text-[var(--ash)] leading-relaxed">
+          <p class="sm:col-span-2 text-base sm:text-lg">
+            大学生艾伦在一次跨年烟火晤上，突然被一段预见环住：舊台崩塌、火花点燃线缆、人群在尖叫中被吞没。他惊醒，拉出身边七个人仓皇逃离——下一秒，预见成真。
+            <br/><br/>
+            他们以为自己骗过了死亡。但名单上的顺序从未被抹去——只是被推迟。电梯、玻璃、扪手、一杯注满的水，日常的一切都变成倒计时的刻度。
+          </p>
+          <p class="text-sm sm:text-base border-l-2 border-[var(--blood)] pl-5 text-[var(--bone)]/80">
+            “你以为你逃出来了？<br/>你只是跟错了队。”<br/><br/>
+            <span class="mono text-[var(--crimson-2)] text-xs tracking-widest">— 未知来电</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 主演 / 角色卡 ============ -->
+    <section id="cast" class="relative py-24 sm:py-32 border-t hairline bg-[var(--ink-2)]">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="reveal flex items-center gap-3 mb-12">
+          <span class="mono text-[var(--crimson-2)] text-xs tracking-[0.4em]">02 / 角色</span>
+          <span class="flex-1 h-px bg-gradient-to-r from-[var(--blood)]/60 to-transparent"></span>
+        </div>
+        <div id="cast-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+      </div>
+    </section>
+    <!-- ============ 预告片占位 ============ -->
+    <section id="trailer" class="relative py-24 sm:py-32 border-t hairline">
+      <div class="mx-auto max-w-6xl px-5 sm:px-8">
+        <div class="reveal flex items-center gap-3 mb-12">
+          <span class="mono text-[var(--crimson-2)] text-xs tracking-[0.4em]">03 / 预告</span>
+          <span class="flex-1 h-px bg-gradient-to-r from-[var(--blood)]/60 to-transparent"></span>
+        </div>
+        <button id="trailer-btn" class="reveal group relative block w-full aspect-video rounded-sm overflow-hidden border hairline focus:outline-none focus:ring-2 focus:ring-[var(--crimson)]" aria-label="播放预告片（占位）">
+          <div class="absolute inset-0" style="background:
+            radial-gradient(60% 80% at 50% 50%, rgba(139,0,0,0.3), transparent 70%),
+            linear-gradient(135deg, #101012, #050506);"></div>
+          <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g stroke="#2a2a2e" stroke-width="1" fill="none">
+              <path d="M0 500 L300 300 L600 460 L900 250 L1200 420"/>
+              <path d="M0 560 L300 380 L600 540 L900 340 L1200 500"/>
+            </g>
+          </svg>
+          <span class="absolute inset-0 flex flex-col items-center justify-center gap-4">
+            <span class="grid place-items-center w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[var(--crimson)] bg-black/40 group-hover:bg-[var(--blood)] group-hover:scale-105 transition cta-pulse">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="mono text-xs tracking-[0.35em] text-[var(--ash)] group-hover:text-white transition">播放官方预告（占位）</span>
+          </span>
+        </button>
+        <p id="trailer-note" class="mono text-xs text-[var(--ash)]/60 mt-4 text-center tracking-widest">预告片源为占位，上线后可接入真实视频。</p>
+      </div>
+    </section>
+
+    <!-- ============ 剧照画廊占位 ============ -->
+    <section id="gallery" class="relative py-24 sm:py-32 border-t hairline bg-[var(--ink-2)]">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="reveal flex items-center gap-3 mb-12">
+          <span class="mono text-[var(--crimson-2)] text-xs tracking-[0.4em]">04 / 剧照</span>
+          <span class="flex-1 h-px bg-gradient-to-r from-[var(--blood)]/60 to-transparent"></span>
+        </div>
+        <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"></div>
+        <p class="mono text-xs text-[var(--ash)]/60 mt-6 tracking-widest">剧照均为暗黑风抽象占位，不涉及任何版权物料。</p>
+      </div>
+    </section>
+    <!-- ============ 上映信息 + CTA ============ -->
+    <section id="release" class="relative py-28 sm:py-36 border-t hairline overflow-hidden">
+      <div class="absolute inset-0 -z-10" style="background:
+        radial-gradient(70% 60% at 50% 40%, rgba(139,0,0,0.32), transparent 70%),
+        linear-gradient(180deg, #060607, #0b0b0d);"></div>
+      <div class="mx-auto max-w-4xl px-5 sm:px-8 text-center">
+        <p class="reveal mono text-[var(--crimson-2)] tracking-[0.4em] text-xs sm:text-sm mb-6">COMING&nbsp;SOON</p>
+        <h2 class="reveal serif blood-text text-4xl sm:text-6xl leading-tight mb-4">2026 万圣节档</h2>
+        <p class="reveal serif text-2xl sm:text-3xl text-[var(--crimson-2)] crimson-glow mb-10">10 / 31 全国上映</p>
+
+        <div class="reveal flex flex-wrap items-center justify-center gap-4">
+          <a href="#" class="min-h-[44px] inline-flex items-center px-8 py-3 text-base font-semibold tracking-wider text-white bg-[var(--blood)] hover:bg-[var(--crimson)] transition rounded-sm cta-pulse">立即购票</a>
+          <a href="#" class="min-h-[44px] inline-flex items-center px-8 py-3 text-base font-medium tracking-wider text-[var(--bone)] border border-[var(--ash)]/30 hover:border-[var(--crimson)] hover:text-white transition rounded-sm">预约提醒</a>
+        </div>
+        <p class="reveal mono text-xs text-[var(--ash)]/60 mt-8 tracking-widest">购票 / 预约为占位链接，上线后可接入真实票务平台。</p>
+
+        <div class="reveal grid grid-cols-3 gap-4 max-w-md mx-auto mt-14 text-center">
+          <div><div class="mono text-2xl sm:text-3xl text-white">R</div><div class="text-[11px] text-[var(--ash)] tracking-widest mt-1">分级</div></div>
+          <div><div class="mono text-2xl sm:text-3xl text-white">109'</div><div class="text-[11px] text-[var(--ash)] tracking-widest mt-1">片长</div></div>
+          <div><div class="mono text-2xl sm:text-3xl text-white">惊悚</div><div class="text-[11px] text-[var(--ash)] tracking-widest mt-1">类型</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 页脚 ============ -->
+    <footer class="relative border-t hairline py-14">
+      <div class="mx-auto max-w-7xl px-5 sm:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
+          <div>
+            <div class="serif text-2xl tracking-[0.25em] mb-3">死神来了<span class="text-[var(--crimson-2)]">4</span></div>
+            <p class="text-sm text-[var(--ash)]">死亡早已为你排好顺序。</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="grid place-items-center w-12 h-12 rounded-full border-2 border-[var(--crimson)] text-[var(--crimson-2)] font-bold text-lg shrink-0">R</span>
+            <p class="text-xs text-[var(--ash)] leading-relaxed max-w-xs">
+              本片分级：<span class="text-[var(--bone)]">R 级 / 16+</span>。含惊悚、血腔及不适画面，未成年人需在成年人陪同下观看。请谨慎购票。
+            </p>
+          </div>
+        </div>
+        <div class="mt-10 pt-6 border-t hairline flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-[var(--ash)]/60">
+          <p class="mono tracking-widest">FINAL DESTINATION 4 · 虚构作品 · 本站不含任何真实电影版权素材</p>
+          <p>© 2026 虚构影业 · 仅供演示</p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      (function () {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* ---------- 倒计时：默认 2026-10-31 00:00 (本地时间) ---------- */
+        var target = new Date(2026, 9, 31, 0, 0, 0).getTime();
+        var els = {
+          days: document.querySelector('[data-cd="days"]'),
+          hours: document.querySelector('[data-cd="hours"]'),
+          minutes: document.querySelector('[data-cd="minutes"]'),
+          seconds: document.querySelector('[data-cd="seconds"]')
+        };
+        var note = document.getElementById('cd-note');
+        function pad(n) { return String(n).padStart(2, '0'); }
+        function tick() {
+          var diff = target - Date.now();
+          if (diff <= 0) {
+            if (els.days) els.days.textContent = '00';
+            if (els.hours) els.hours.textContent = '00';
+            if (els.minutes) els.minutes.textContent = '00';
+            if (els.seconds) els.seconds.textContent = '00';
+            if (note) note.textContent = '— 顺序已到 · 正在上映 —';
+            return false;
+          }
+          var s = Math.floor(diff / 1000);
+          if (els.days) els.days.textContent = pad(Math.floor(s / 86400));
+          if (els.hours) els.hours.textContent = pad(Math.floor((s % 86400) / 3600));
+          if (els.minutes) els.minutes.textContent = pad(Math.floor((s % 3600) / 60));
+          if (els.seconds) els.seconds.textContent = pad(s % 60);
+          return true;
+        }
+        tick();
+        var timer = setInterval(function () { if (!tick()) clearInterval(timer); }, 1000);
+
+        /* ---------- reveal on scroll ---------- */
+        var io = null;
+        if (reduce || !('IntersectionObserver' in window)) {
+          // 不动画：直接显示；并提供幂等的观察函数供后续动态节点使用
+          document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+          window.__observeReveals = function (root) {
+            (root || document).querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+          };
+        } else {
+          io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e, i) {
+              if (e.isIntersecting) {
+                var el = e.target;
+                setTimeout(function () { el.classList.add('in'); }, (el.dataset.delay ? +el.dataset.delay : 0));
+                io.unobserve(el);
+              }
+            });
+          }, { threshold: 0.12 });
+          // 暴露：观察某容器内尚未观察的 .reveal（供动态生成的角色卡/画廊使用）
+          window.__observeReveals = function (root) {
+            (root || document).querySelectorAll('.reveal').forEach(function (el, i) {
+              if (el.dataset.observed) return;
+              el.dataset.observed = '1';
+              el.dataset.delay = (i % 5) * 80;
+              io.observe(el);
+            });
+          };
+          document.querySelectorAll('.reveal').forEach(function (el, i) {
+            el.dataset.observed = '1';
+            el.dataset.delay = (i % 5) * 80;
+            io.observe(el);
+          });
+          // Hero 首屏立即显示
+          document.querySelectorAll('#hero .reveal').forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('in'); }, 120 + i * 110);
+          });
+        }
+
+        /* ---------- 角色卡（SVG 剪影占位） ---------- */
+        var U = 'https://images.unsplash.com/';
+        var IMGQ = '?w=600&q=70&auto=format&fit=crop';
+        // 角色卡：图片为本地资源（src/assets/cast/cast-1..8），
+        // 由 src/main.js 经 Vite import.meta.glob 打包后挂在 window.__CAST_IMAGES__。
+        var cast = [
+          { name: '艾伦 · 预见者', actor: '陈宇航 饰', hue: 0 },
+          { name: '莘莘 · 不信邪者', actor: '林依晨 饰', hue: 12 },
+          { name: '魏森 · 厌世者', actor: '张一鸣 饰', hue: 350 },
+          { name: '安娜 · 赎命者', actor: '赵梦琪 饰', hue: 8 },
+          { name: '老K · 警探', actor: '王振东 饰', hue: 4 },
+          { name: '小繬 · 幻觉者', actor: '周佳佳 饰', hue: 340 },
+          { name: '陈医生 · 知情者', actor: '李守义 饰', hue: 6 },
+          { name: '「未知」· 死神', actor: '——', hue: 0, ghost: true }
+        ];
+        var castGrid = document.getElementById('cast-grid');
+        function renderCast() {
+          if (!castGrid) return;
+          if (castGrid.dataset.rendered) return;
+          castGrid.dataset.rendered = '1';
+          var imgs = window.__CAST_IMAGES__ || [];
+          cast.forEach(function (c, idx) {
+            c.img = imgs[idx] || null;
+            var ghost = c.ghost;
+            var avatar =
+              '<svg viewBox="0 0 200 240" class="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+                '<defs><radialGradient id="g' + c.hue + '" cx="50%" cy="35%" r="75%">' +
+                  '<stop offset="0%" stop-color="hsl(' + c.hue + ',60%,' + (ghost ? '6%' : '22%') + ')"/>' +
+                  '<stop offset="100%" stop-color="#070708"/>' +
+                '</radialGradient></defs>' +
+                '<rect width="200" height="240" fill="url(#g' + c.hue + ')"/>' +
+                '<g fill="' + (ghost ? '#0e0e10' : '#161618') + '">' +
+                  '<circle cx="100" cy="92" r="40"/>' +
+                  '<path d="M40 240 C40 175 60 150 100 150 C140 150 160 175 160 240 Z"/>' +
+                '</g>' +
+                (ghost ? '' : '<path d="M100 130 q4 18 -2 30" stroke="#8b0000" stroke-width="2" fill="none" opacity="0.6"/>') +
+              '</svg>';
+            var el = document.createElement('article');
+            el.className = 'reveal group relative overflow-hidden rounded-sm border hairline aspect-[5/6] card-edge';
+            // 本地图（Vite 打包，带 hash）+ onerror 回退到 SVG 占位
+            var media = c.img
+              ? '<img src="' + c.img + '" loading="lazy" alt="角色剧照：' + c.name + '" ' +
+                  'class="absolute inset-0 w-full h-full object-cover grayscale-[0.35] contrast-110 brightness-[0.62] group-hover:brightness-75 transition duration-500" ' +
+                  'onerror="this.onerror=null;this.outerHTML=\'' + avatar.replace(/'/g, "\\'") + '\'">'
+              : avatar;
+            el.innerHTML =
+              media +
+              '<div class="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent"></div>' +
+              '<div class="absolute inset-0 bg-[var(--blood)]/10 mix-blend-multiply"></div>' +
+              '<div class="absolute inset-x-0 bottom-0 p-3 sm:p-4">' +
+                '<div class="serif text-sm sm:text-base text-white leading-tight">' + c.name + '</div>' +
+                '<div class="text-[11px] sm:text-xs text-[var(--ash)] mt-1">' + c.actor + '</div>' +
+              '</div>' +
+              '<div class="absolute top-0 left-0 h-0.5 w-0 bg-[var(--crimson)] group-hover:w-full transition-all duration-500"></div>';
+            castGrid.appendChild(el);
+          });
+          // 重新触发 reveal 动画（新节点需被观察）
+          if (window.__observeReveals) window.__observeReveals(castGrid);
+        }
+        // 本地图可能晚于本脚本就绪：已就绪则立即渲染，否则等事件；并加超时兑底
+        if (window.__CAST_IMAGES__) { renderCast(); }
+        else {
+          window.addEventListener('cast-images-ready', renderCast, { once: true });
+          setTimeout(renderCast, 2500); // 兑底：即便模块未加载也渲染（回退 SVG）
+        }
+
+        /* ---------- 剧照画廊（抽象暗黑构图占位） ---------- */
+        var galGrid = document.getElementById('gallery-grid');
+        // 剧照画廊：本地图 src/assets/gallery/shot-1..6，由 src/main.js 经 Vite 打包后挂 window.__GALLERY_IMAGES__
+        var scenes = [
+          { t: '跨年烟火夜', big: true },
+          { t: '崩塌的舞台' },
+          { t: '电梯间' },
+          { t: '碎裂的玻璃' },
+          { t: '雨夜公路', big: true },
+          { t: '最后一人' }
+        ];
+        function renderGallery() {
+          if (!galGrid || galGrid.dataset.rendered) return;
+          galGrid.dataset.rendered = '1';
+          var gimgs = window.__GALLERY_IMAGES__ || [];
+          scenes.forEach(function (s, i) {
+            s.img = gimgs[i] || null;
+            var hue = [0, 350, 8, 4, 12, 340][i % 6];
+            var fig = document.createElement('figure');
+            fig.className = 'reveal relative overflow-hidden rounded-sm border hairline ' +
+              (s.big ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]');
+            var sceneSvg =
+              '<svg viewBox="0 0 480 320" class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+                '<defs><linearGradient id="sg' + i + '" x1="0" y1="0" x2="1" y2="1">' +
+                  '<stop offset="0%" stop-color="hsl(' + hue + ',55%,14%)"/>' +
+                  '<stop offset="100%" stop-color="#060607"/>' +
+                '</linearGradient></defs>' +
+                '<rect width="480" height="320" fill="url(#sg' + i + ')"/>' +
+                '<g stroke="#000" stroke-opacity="0.5" stroke-width="1.5" fill="none">' +
+                  '<path d="M0 230 L120 150 L240 250 L360 130 L480 220"/>' +
+                  '<path d="M0 270 L120 200 L240 290 L360 180 L480 260"/>' +
+                '</g>' +
+                '<circle cx="' + (60 + i * 40) + '" cy="90" r="3" fill="#c81212" opacity="0.8"/>' +
+              '</svg>';
+            var gMedia = s.img
+              ? '<img src="' + s.img + '" loading="lazy" alt="剧照：' + s.t + '" ' +
+                  'class="absolute inset-0 w-full h-full object-cover grayscale-[0.3] contrast-110 brightness-[0.6]" ' +
+                  'onerror="this.onerror=null;this.outerHTML=\'' + sceneSvg.replace(/'/g, "\\'") + '\'">'
+              : sceneSvg;
+            fig.innerHTML =
+              gMedia +
+              '<div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>' +
+              '<div class="absolute inset-0 bg-[var(--blood)]/10 mix-blend-multiply"></div>' +
+              '<figcaption class="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 to-transparent text-xs text-[var(--ash)] tracking-widest">' + s.t + '</figcaption>';
+            galGrid.appendChild(fig);
+          });
+          if (window.__observeReveals) window.__observeReveals(galGrid);
+        }
+        if (window.__GALLERY_IMAGES__) { renderGallery(); }
+        else {
+          window.addEventListener('gallery-images-ready', renderGallery, { once: true });
+          setTimeout(renderGallery, 2500); // 兑底：模块未加载也渲染（回退 SVG）
+        }
+
+        /* ---------- 预告占位点击 ---------- */
+        var tBtn = document.getElementById('trailer-btn');
+        var tNote = document.getElementById('trailer-note');
+        if (tBtn) {
+          tBtn.addEventListener('click', function () {
+            if (tNote) {
+              tNote.textContent = '预告片尚未发布 — 敬请期待 2026 万圣节档。';
+              tNote.classList.add('text-[var(--crimson-2)]');
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

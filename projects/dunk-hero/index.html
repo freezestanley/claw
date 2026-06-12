@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="飞跃 FLYDUNK · 腾空即巅峰。漫画风篮球飞人宣传站。" />
+    <title>飞跃 FLYDUNK · 腾空即巅峰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Archivo+Black&family=Noto+Sans+SC:wght@500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #fdf6e3;
+        --ink: #0b0b0b;
+        --blue: #1f6feb;
+        --flame: #ff4d2e;
+        --yellow: #ffd23f;
+        --magenta: #e8336d;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: "Noto Sans SC", system-ui, sans-serif; background: var(--paper); }
+      .font-comic { font-family: "Bangers", "Noto Sans SC", system-ui, sans-serif; letter-spacing: 0.02em; }
+      .font-heavy { font-family: "Archivo Black", "Noto Sans SC", system-ui, sans-serif; }
+      .ink-stroke { -webkit-text-stroke: 2px var(--ink); }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      window.anime && (window.animate = anime.animate || anime);
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

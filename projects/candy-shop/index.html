@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="糖糖屋 Sweetie Hut — 多巴胺糖果网店，软糖、巧克力、棒棒糖、礼盒，甜到心里。(演示站)" />
+    <title>糖糖屋 Sweetie Hut · 多巴胺糖果网店（演示）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind 主题扩展：多巴胺糖果配色 + 圆角卡通
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              candy: {
+                pink: "#ff6fae",
+                yellow: "#ffd23f",
+                mint: "#5fd6a6",
+                grape: "#a06bff",
+                orange: "#ff9248",
+                sky: "#56c2ff",
+                cream: "#fff8f0",
+                ink: "#3a2b3a"
+              }
+            },
+            borderRadius: { candy: "28px" },
+            fontFamily: {
+              round: ['"Baloo 2"', '"Nunito"', '"PingFang SC"', '"Microsoft YaHei"', "system-ui", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { font-family: '"Baloo 2"', "Nunito", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif; }
+      /* 安全区适配 H5 刘海 */
+      .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0px); }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body class="bg-candy-cream text-candy-ink antialiased">
+    <div id="app"></div>
+    <script>
+      window.anime && (window.animate = anime.animate || anime);
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

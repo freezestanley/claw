@@ -1,0 +1,60 @@
+{
+  "project": {
+    "slug": "candy-shop",
+    "name": "糖糖屋 Sweetie Hut",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "running"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4173,
+    "port": 4369,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4369/",
+    "proxy": {
+      "/api": {
+        "target": "http://127.0.0.1:8787",
+        "changeOrigin": true,
+        "secure": false
+      }
+    },
+    "blocking": true
+  },
+  "apis": {
+    "baseUrl": "",
+    "proxyPrefix": "/api",
+    "endpoints": [],
+    "mockAllowed": true,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": true,
+    "allowStock": false,
+    "allowAiImage": false,
+    "strategy": "inline-svg",
+    "blocking": false
+  },
+  "adaptation": {
+    "targets": ["pc", "pad", "h5"],
+    "breakpoints": { "h5Max": 767, "padMin": 768, "padMax": 1023, "pcMin": 1024 },
+    "interaction": { "touchTargetMin": 44, "hoverDependentAllowed": false },
+    "reducedMotion": true,
+    "blocking": true
+  }
+}

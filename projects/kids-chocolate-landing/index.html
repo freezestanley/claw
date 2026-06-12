@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="可可熊 CocoBear — 为孩子用心，让家长放心的儿童巧克力。真实可可、低糖配方、透明原料。（占位演示站，非真实品牌）"
+    />
+    <title>可可熊 CocoBear · 给孩子的安心巧克力</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cocoa: {
+                50: "#FBF1E7",
+                100: "#F3DFC9",
+                200: "#E0BC97",
+                300: "#C9966A",
+                400: "#A9744F",
+                500: "#8A5A38",
+                600: "#6B4226",
+                700: "#4A2C18",
+                800: "#3A2417",
+                900: "#2A190F",
+              },
+              cream: {
+                50: "#FFFDF9",
+                100: "#FFF8EF",
+                200: "#FDEFDD",
+                300: "#FBE3C7",
+              },
+              candy: {
+                orange: "#FF9E45",
+                red: "#F0586B",
+                mint: "#7FD4B6",
+              },
+            },
+            fontFamily: {
+              sans: [
+                '"PingFang SC"',
+                '"Hiragino Sans GB"',
+                '"Microsoft YaHei"',
+                "ui-rounded",
+                '"Nunito"',
+                "system-ui",
+                "sans-serif",
+              ],
+            },
+            borderRadius: {
+              "4xl": "2rem",
+              "5xl": "2.5rem",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      body { -webkit-font-smoothing: antialiased; }
+      /* reveal 默认可见，仅在 JS 确认可做动画时才临时隐藏(加 .reveal-armed) */
+      .reveal-armed { opacity: 0; transform: translateY(24px); }
+      .floaty { will-change: transform; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal-armed { opacity: 1 !important; transform: none !important; }
+        .floaty { animation: none !important; }
+        * { transition: none !important; }
+      }
+    </style>
+  </head>
+  <body class="bg-cream-100 text-cocoa-800 font-sans antialiased">
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

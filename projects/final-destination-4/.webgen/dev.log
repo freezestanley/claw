@@ -1,0 +1,16 @@
+
+> webgen-vite-page@0.1.0 dev /Users/za-stanlexu/.openclaw/webgen-workspace/projects/final-destination-4
+> vite
+
+
+  VITE v5.4.21  ready in 129 ms
+
+  ➜  Local:   http://127.0.0.1:4480/
+6:34:13 PM [vite] page reload src/main.js
+6:34:53 PM [vite] page reload index.html
+6:35:22 PM [vite] page reload index.html
+6:35:52 PM [vite] page reload index.html
+6:44:36 PM [vite] page reload src/main.js
+6:44:55 PM [vite] page reload index.html
+6:45:12 PM [vite] page reload index.html
+ ELIFECYCLE  Command failed.

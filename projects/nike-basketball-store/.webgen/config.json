@@ -1,0 +1,95 @@
+{
+  "project": {
+    "slug": "nike-basketball-store",
+    "name": "nike basketball store",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "built"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "python": "3.11",
+    "pythonEnv": ".venv",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4173,
+    "port": 4288,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4288/",
+    "proxy": {
+      "/api": {
+        "target": "https://api.example.com",
+        "changeOrigin": true,
+        "secure": true
+      }
+    },
+    "state": {
+      "status": "running",
+      "pid": null,
+      "startedAt": "2026-06-11T07:01:54.500Z",
+      "readyAt": "2026-06-11T07:01:54.501Z",
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": true
+  },
+  "apis": {
+    "baseUrl": "https://api.example.com",
+    "proxyPrefix": "/api",
+    "auth": {
+      "type": "bearer",
+      "source": "env"
+    },
+    "endpoints": [],
+    "mockAllowed": true,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": true,
+    "allowStock": false,
+    "allowAiImage": false,
+    "blocking": false
+  },
+  "adaptation": {
+    "targets": [
+      "pc",
+      "pad",
+      "h5"
+    ],
+    "breakpoints": {
+      "h5Max": 767,
+      "padMin": 768,
+      "padMax": 1023,
+      "pcMin": 1024
+    },
+    "orientations": {
+      "padLandscapeRequired": true,
+      "h5LandscapeRequired": false
+    },
+    "interaction": {
+      "touchTargetMin": 44,
+      "hoverDependentAllowed": false
+    },
+    "blocking": true
+  },
+  "envStatus": {
+    "nodeInstalled": true,
+    "pythonInstalled": false,
+    "lastCheckedAt": "2026-06-11T06:52:43.628Z",
+    "lastPreviewAt": "2026-06-11T07:01:54.501Z",
+    "lastBuildAt": "2026-06-11T07:24:44.664Z"
+  }
+}

@@ -21,8 +21,17 @@
 - Tailwind CSS
 - Lucide
 - Web Awesome
+- anime.js（页面轻量动效）
+  `<script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>`
+  使用：`const { animate } = anime;`
 
 只有在模板或功能复杂度明确要求时，才改为本地依赖打包。
+
+## 动画策略
+
+- **轻量动效**（淡入、位移、缩放、数字滚动等）优先用 **anime.js**（已在 scaffold `index.html` 引入）。
+- **复杂动画**（时间轴编排、ScrollTrigger 滚动驱动、SVG MorphSVG/MotionPath、Flip 布局过渡等）优先用 **GSAP**，并参考已安装的 `gsap-skills`（GSAP 官方 AI 技能：core/timeline/ScrollTrigger/插件用法与最佳实践）。
+- 动画须尊重 `prefers-reduced-motion`，提供降级。
 
 ## API 代理
 

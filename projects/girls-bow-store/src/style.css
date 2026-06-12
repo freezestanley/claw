@@ -1,0 +1,101 @@
+:root {
+  --cream: #fdf6f4;
+  --milk: #fffafa;
+  --blush: #f7d9e3;
+  --rose: #e8859b;
+  --rose-deep: #d96380;
+  --wine: #a23b56;
+  --ink: #4a2230;
+}
+* { -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+
+/* 公告滚动 */
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 24s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* 毛玻璃导航 */
+.nav-blur {
+  background: rgba(255, 250, 250, 0.82);
+  backdrop-filter: saturate(160%) blur(12px);
+}
+
+/* 柔光投影 */
+.shadow-soft {
+  box-shadow: 0 24px 60px -28px rgba(162, 59, 86, 0.35);
+}
+.shadow-bow {
+  box-shadow: 0 18px 44px -22px rgba(217, 99, 128, 0.55);
+}
+
+/* 按钮 */
+.btn-rose {
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+  color: #fff;
+  font-weight: 600;
+  transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
+  box-shadow: 0 14px 30px -12px rgba(217, 99, 128, 0.6);
+}
+.btn-rose:hover { filter: brightness(1.05); }
+.btn-rose:active { transform: scale(0.97); }
+
+.btn-outline {
+  border: 1.5px solid rgba(162, 59, 86, 0.3);
+  color: var(--wine);
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-outline:hover {
+  background: rgba(217, 99, 128, 0.07);
+  border-color: var(--rose);
+  color: var(--rose-deep);
+}
+
+/* 小圆点 */
+.dot {
+  width: 7px; height: 7px; border-radius: 9999px;
+  background: var(--rose); flex: none;
+}
+
+/* hero 浮动徽标 + 蝴蝶结轻晃 */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+.floaty { animation: floaty 4.5s ease-in-out infinite; }
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2.5deg); }
+}
+.sway { animation: sway 6s ease-in-out infinite; transform-origin: 50% 35%; }
+
+/* 单品 / lookbook hover */
+.piece, .look { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+.piece:hover, .look:hover { transform: translateY(-6px); }
+.piece-bow { transition: transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+.piece:hover .piece-bow { transform: scale(1.08) rotate(-3deg); }
+.look-img { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+.look:hover .look-img { transform: scale(1.06); }
+
+/* 入场初始态（anime 接管；无 JS/reduced-motion 用 .in 兜底） */
+.reveal { opacity: 0; }
+.reveal.in { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; }
+  .floaty, .marquee, .sway { animation: none; }
+}
+
+/* 链接焦点可见性（无障碍） */
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--rose-deep);
+  outline-offset: 2px;
+}

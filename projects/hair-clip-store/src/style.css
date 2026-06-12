@@ -1,0 +1,79 @@
+:root {
+  --cream: #f6efe7;
+  --milk: #fbf7f1;
+  --caramel: #7a4a2b;
+  --tang: #ff6a3d;
+}
+* { -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+
+/* 公告滚动 */
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 22s linear infinite;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* 毛玻璃导航 */
+.nav-blur {
+  background: rgba(251, 247, 241, 0.82);
+  backdrop-filter: saturate(150%) blur(12px);
+}
+
+/* 柔光投影 */
+.shadow-soft {
+  box-shadow: 0 24px 60px -28px rgba(122, 74, 43, 0.45);
+}
+
+/* 按钮 */
+.btn-tang {
+  background: var(--tang);
+  color: #fff;
+  font-weight: 600;
+  transition: filter 0.2s ease, transform 0.1s ease, box-shadow 0.3s ease;
+  box-shadow: 0 14px 30px -12px rgba(255, 106, 61, 0.65);
+}
+.btn-tang:hover { filter: brightness(1.05); }
+.btn-tang:active { transform: scale(0.97); }
+
+.btn-outline {
+  border: 1.5px solid rgba(122, 74, 43, 0.35);
+  color: var(--caramel);
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btn-outline:hover { background: rgba(122, 74, 43, 0.06); border-color: var(--tang); color: var(--tang); }
+
+/* 小圆点 */
+.dot {
+  width: 7px; height: 7px; border-radius: 9999px;
+  background: var(--tang); flex: none;
+}
+
+/* hero 浮动徽标 */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+.floaty { animation: floaty 4.5s ease-in-out infinite; }
+
+/* 单品 / lookbook 图片 hover */
+.piece, .look { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+.piece:hover, .look:hover { transform: translateY(-6px); }
+.piece-img { transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+.piece:hover .piece-img { transform: scale(1.06); }
+.hero-img img { transition: transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.hero-img:hover img { transform: scale(1.04); }
+
+/* 入场初始态（JS 命中后用 anime 接管；无 JS/reduced-motion 时 .in 兜底显示） */
+.reveal { opacity: 0; }
+.reveal.in { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; }
+  .floaty, .marquee { animation: none; }
+}

@@ -1,6 +1,6 @@
 # USER.md - 我所服务的这个人
 
-- **称呼**：孟老板
+- **称呼**：老板
 - **时区**：Asia/Shanghai (GMT+8)
 - **技术栈偏好**：
   - 前端：Next.js 15, Tailwind CSS v4, TypeScript, Shadcn/ui

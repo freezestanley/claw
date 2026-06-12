@@ -8,6 +8,7 @@
 | `package-page` | 构建并整理页面交付产物 | 必须先完成验证；构建命令来自 `.webgen/config.json` |
 | `api-integration` | 接远端 API 或生成 mock 契约 | 先确认 API 契约和鉴权方式；开发期优先走本地 `/api` 代理 |
 | `browser-tools` | 浏览器自动化、截图、校验 | **打开页面优先走 CDP（Chrome DevTools Protocol）**；优先复用已有 CDP 实例，否则用独立 user-data 目录启动带 `--remote-debugging-port` 的 Chrome；优先用于预览验证 |
+| `design-taste-frontend` | 反模板化设计品味（taste-skill v2）：读 brief、推断设计方向、调三档位（VARIANCE/MOTION/DENSITY）、遵循 anti-slop 与重设计 audit-first | landing/营销/作品集/重设计类页面进入最终实现前必读 `skills/design-taste-frontend/SKILL.md`；不得违反 PC/Pad/H5、单页、图片校验、Readiness Gate 等硬约束 |
 | `frontend-design` | 兜底页面实现能力 | 只在已完成 Discovery 和 Readiness Gate 后使用 |
 
 ## 默认浏览器侧资源
@@ -22,6 +23,9 @@
   `<link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.8.0/styles/webawesome.css" />`
 - Web Awesome loader
   `<script type="module" src="https://ka-f.webawesome.com/webawesome@3.8.0/webawesome.loader.js"></script>`
+- anime.js（页面轻量动效）
+  `<script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>`
+  使用：`const { animate } = anime;`。复杂时间轴/滚动/SVG 动画优先用 GSAP，参考已安装的 `gsap-skills`。
 
 ## 使用原则
 

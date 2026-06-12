@@ -1,0 +1,76 @@
+{
+  "project": {
+    "slug": "girls-bow-store",
+    "name": "girls bow store",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "active"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4276,
+    "port": 4276,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4276/",
+    "proxy": {
+      "/api": {
+        "target": "http://127.0.0.1:8787",
+        "changeOrigin": true,
+        "secure": false
+      }
+    },
+    "state": {
+      "status": "stopped",
+      "pid": null,
+      "startedAt": null,
+      "readyAt": null,
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": false
+  },
+  "apis": {
+    "baseUrl": null,
+    "proxyPrefix": "/api",
+    "auth": { "type": "none", "source": "none" },
+    "endpoints": [],
+    "mockAllowed": true,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": ["hero", "story", "lookbook"],
+    "allowPlaceholder": true,
+    "allowStock": true,
+    "allowAiImage": false,
+    "strategy": "svg-bow-primary + real-ambient-pending-review",
+    "blocking": false
+  },
+  "adaptation": {
+    "targets": ["pc", "pad", "h5"],
+    "primary": "pc",
+    "breakpoints": { "h5Max": 767, "padMin": 768, "padMax": 1023, "pcMin": 1024 },
+    "orientations": { "padLandscapeRequired": true, "h5LandscapeRequired": false },
+    "interaction": { "touchTargetMin": 44, "hoverDependentAllowed": false },
+    "blocking": false
+  },
+  "envStatus": {
+    "nodeInstalled": true,
+    "lastCheckedAt": "2026-06-11T07:28:00Z",
+    "lastPreviewAt": null,
+    "lastBuildAt": null
+  }
+}

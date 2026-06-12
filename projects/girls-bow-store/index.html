@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#fdf6f4" />
+    <title>Ribbonè · 蝴蝶结发饰小店 | 把温柔系在发间</title>
+    <meta
+      name="description"
+      content="Ribbonè 蝴蝶结发饰小店——缎带、丝绒、珍珠蝴蝶结，甜美法式少女风，为每个女孩把温柔系在发间。"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Poppins:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#fdf6f4",
+              milk: "#fffafa",
+              blush: "#f7d9e3",
+              "blush-soft": "#fceef2",
+              rose: "#e8859b",
+              "rose-deep": "#d96380",
+              wine: "#a23b56",
+              ink: "#4a2230",
+              fog: "#a87f8c"
+            },
+            fontFamily: {
+              display: ['"Fraunces"', '"Noto Sans SC"', "serif"],
+              sans: ['"Poppins"', '"Noto Sans SC"', "system-ui", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="bg-cream text-ink font-sans antialiased">
+    <div id="app"></div>
+    <script>
+      window.anime && (window.animate = anime.animate || anime);
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
