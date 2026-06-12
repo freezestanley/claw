@@ -1,0 +1,71 @@
+{
+  "project": {
+    "slug": "api-playground",
+    "name": "API 联调演示台",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "active"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "24.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4173,
+    "port": 4369,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4369/",
+    "note": "前端直连用户填写的 Base URL（默认 http://localhost:3000），CORS 由后端 OPTIONS 处理，不走 Vite /api 代理",
+    "state": {
+      "status": "running",
+      "startedAt": "2026-06-12T03:37:00.000Z",
+      "readyAt": "2026-06-12T03:37:01.000Z",
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": false
+  },
+  "apis": {
+    "baseUrl": "http://localhost:3000",
+    "proxyPrefix": null,
+    "auth": {
+      "type": "bearer",
+      "source": "login"
+    },
+    "endpoints": [
+      { "method": "POST", "path": "/upload", "desc": "multipart 文件上传，最多5个，每个≤10MB" },
+      { "method": "GET", "path": "/users/search", "desc": "用户搜索，q/role/department/page/pageSize" },
+      { "method": "POST", "path": "/auth/login", "desc": "JSON 登录，返回 Base64 mock token" }
+    ],
+    "mockAllowed": false,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": true,
+    "allowStock": false,
+    "allowAiImage": false,
+    "blocking": false
+  },
+  "adaptation": {
+    "targets": ["pc", "pad", "h5"],
+    "breakpoints": { "h5Max": 767, "padMin": 768, "padMax": 1023, "pcMin": 1024 },
+    "interaction": { "touchTargetMin": 44, "hoverDependentAllowed": false },
+    "blocking": false
+  },
+  "envStatus": {
+    "nodeInstalled": true,
+    "lastCheckedAt": "2026-06-12T03:32:00.000Z"
+  }
+}

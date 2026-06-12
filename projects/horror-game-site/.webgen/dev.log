@@ -1,0 +1,10 @@
+
+> webgen-demo-site-template@0.1.0 dev /Users/za-stanlexu/.openclaw/webgen-workspace/projects/horror-game-site
+> vite
+
+
+  VITE v5.4.21  ready in 1013 ms
+
+  ➜  Local:   http://127.0.0.1:4521/
+11:35:17 AM [vite] page reload src/main.js
+11:35:24 AM [vite] page reload src/site/render.js

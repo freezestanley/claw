@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>API 联调演示台 · Dev Console</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net.cn/npm/animejs/dist/bundles/anime.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root { color-scheme: dark; }
+      html, body { background: #0b0f15; }
+      .font-mono-x { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      /* 自定义滚动条（dev-tool 观感） */
+      .nice-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+      .nice-scroll::-webkit-scrollbar-thumb { background: #2b3542; border-radius: 8px; }
+      .nice-scroll::-webkit-scrollbar-track { background: transparent; }
+      @media (prefers-reduced-motion: reduce) {
+        * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+    </style>
+  </head>
+  <body class="bg-[#0b0f15] text-slate-200 antialiased font-mono-x">
+    <div id="app"></div>
+    <script>
+      window.anime && (window.animate = anime.animate || anime);
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

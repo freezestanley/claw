@@ -1,0 +1,31 @@
+{
+  "project": {
+    "slug": "horror-game-site",
+    "name": "ASHFALL 灰落 — 恐怖游戏官网",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "dev-preview"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4173,
+    "port": 4521,
+    "entry": "/",
+    "healthcheck": "http://127.0.0.1:4521/",
+    "proxy": {},
+    "blocking": true
+  }
+}

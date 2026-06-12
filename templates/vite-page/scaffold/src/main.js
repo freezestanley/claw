@@ -1,6 +1,10 @@
 import { mountPage } from "./generated/page.js";
 import { createPreviewRuntime } from "./runtime/create-preview-runtime.js";
 import { renderPreviewShell } from "./runtime/render-preview-shell.js";
+import { CookieUtil } from "./lib/cookie.js";
+
+// 运行时获取并打印当前 cookie
+CookieUtil.log();
 
 const app = document.querySelector("#app");
 const runtime = createPreviewRuntime();

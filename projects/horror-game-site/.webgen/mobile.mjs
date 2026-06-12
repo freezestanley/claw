@@ -1,0 +1,17 @@
+import http from "node:http"; import WebSocket from "ws"; import fs from "node:fs";
+const get=p=>new Promise((res,rej)=>{http.get("http://127.0.0.1:9333"+p,r=>{let d="";r.on("data",c=>d+=c);r.on("end",()=>res(JSON.parse(d)))}).on("error",rej)});
+const ver=await get("/json/version"); const ws=new WebSocket(ver.webSocketDebuggerUrl,{perMessageDeflate:false});
+let id=0;const pe=new Map();const send=(m,pa={},s)=>new Promise(r=>{const i=++id;pe.set(i,r);ws.send(JSON.stringify({id:i,method:m,params:pa,sessionId:s}))});
+const errs=[];await new Promise(r=>ws.on("open",r));
+ws.on("message",raw=>{const m=JSON.parse(raw);if(m.id&&pe.has(m.id)){pe.get(m.id)(m.result);pe.delete(m.id)}if(m.method==="Runtime.exceptionThrown")errs.push(m.params.exceptionDetails.text)});
+const {targetId}=await send("Target.createTarget",{url:"about:blank"});const {sessionId}=await send("Target.attachToTarget",{targetId,flatten:true});
+await send("Page.enable",{},sessionId);await send("Runtime.enable",{},sessionId);
+await send("Emulation.setDeviceMetricsOverride",{width:390,height:844,deviceScaleFactor:2,mobile:true},sessionId);
+await send("Page.navigate",{url:"http://127.0.0.1:4521/#/tools"},sessionId);
+await new Promise(r=>setTimeout(r,2500));
+const ev=async e=>{const r=await send("Runtime.evaluate",{expression:e,returnByValue:true},sessionId);return r?.result?.value};
+const m=await ev(`({docW:document.documentElement.scrollWidth,winW:window.innerWidth,overflow:document.documentElement.scrollWidth>window.innerWidth+1, lastChild:document.querySelector('#app').lastElementChild.tagName})`);
+const shot=await send("Page.captureScreenshot",{format:"png"},sessionId);
+if(shot?.data)fs.writeFileSync(".webgen/tools-mobile.png",Buffer.from(shot.data,"base64"));
+console.log(JSON.stringify({mobile:m,errors:errs}));
+await send("Target.closeTarget",{targetId});ws.close();
