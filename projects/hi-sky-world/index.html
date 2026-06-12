@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>hi sky world</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, "PingFang SC", "Helvetica Neue", system-ui, sans-serif;
+      background: linear-gradient(180deg, #6fb7ff 0%, #aee0ff 45%, #e6f6ff 100%);
+      overflow: hidden;
+    }
+    .cloud {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 999px;
+      filter: blur(2px);
+      animation: drift linear infinite;
+    }
+    .c1 { width: 180px; height: 60px; top: 18%; left: -200px; animation-duration: 34s; }
+    .c2 { width: 120px; height: 42px; top: 60%; left: -160px; animation-duration: 46s; animation-delay: 6s; }
+    .c3 { width: 240px; height: 72px; top: 78%; left: -260px; animation-duration: 58s; animation-delay: 3s; }
+    @keyframes drift { to { transform: translateX(120vw); } }
+    .title {
+      position: relative;
+      z-index: 1;
+      color: #14365c;
+      font-size: clamp(2rem, 9vw, 6rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 18px rgba(255, 255, 255, 0.6);
+      text-align: center;
+      padding: 0 1rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cloud { animation: none; display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <h1 class="title">hi sky world</h1>
+</body>
+</html>

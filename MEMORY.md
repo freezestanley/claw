@@ -8,6 +8,9 @@
   - `NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX`
   - `NEXT_PUBLIC_BASE_API_URL=https://api.getchargen.com/v1`
 
+## 汇报格式（长期约束）
+- 任务完成的结束报告用词**简约明了**，固定给出四块：**改动点 / 问题 / 结果 / 访问路径**。
+
 ## 用户偏好（长期）
 - **孟老板**不喜欢我一次性生成所有页面代码，他习惯按模块验收：先 Landing Page，再功能页，最后合规页。
 - **约定**：每周一早上 9 点自动发站点的 Lighthouse 报告到飞书频道。

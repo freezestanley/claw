@@ -1,0 +1,4 @@
+{
+  "preview": { "tool": "python-http", "port": 4500, "entry": "index.html" },
+  "build": { "command": "none-static-single-file" }
+}

@@ -1,0 +1,5 @@
+{
+  "preview": { "cmd": "python3 -m http.server", "port": 4471, "entry": "/index.html" },
+  "build": { "cmd": "none (static single file)" },
+  "proxy": null
+}
