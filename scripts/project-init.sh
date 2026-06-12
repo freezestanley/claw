@@ -91,4 +91,9 @@ data.envStatus.lastCheckedAt = new Date().toISOString();
 fs.writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`);
 NODE
 
+# 复制完成后立即自检脚手架文件清单，确保未被裁剪。
+if [ -x "$SCRIPT_DIR/project-verify-scaffold.sh" ] || [ -f "$SCRIPT_DIR/project-verify-scaffold.sh" ]; then
+  sh "$SCRIPT_DIR/project-verify-scaffold.sh" "$SLUG" "$TEMPLATE_ID" >&2
+fi
+
 printf '%s\n' "$PROJECT_ROOT"

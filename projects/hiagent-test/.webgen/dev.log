@@ -1,0 +1,33 @@
+
+> webgen-vite-page@0.1.0 dev /Users/za-stanlexu/.openclaw/webgen-workspace/projects/hiagent-test
+> vite
+
+
+  VITE v5.4.21  ready in 91 ms
+
+  ➜  Local:   http://127.0.0.1:4369/
+5:36:06 PM [vite] page reload src/main.js
+5:36:06 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+5:36:07 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+5:36:16 PM [vite] page reload src/generated/page.js
+5:36:16 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+5:36:17 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+5:36:25 PM [vite] page reload index.html
+5:36:27 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+5:36:27 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+5:37:02 PM [vite] http proxy error: /api/health
+Error: connect ECONNREFUSED 127.0.0.1:8787
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+ ELIFECYCLE  Command failed.

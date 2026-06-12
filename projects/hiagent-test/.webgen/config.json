@@ -1,0 +1,80 @@
+{
+  "project": {
+    "slug": "hiagent-test",
+    "name": "hiagent 测试页面",
+    "template": "vite-page",
+    "stack": "vite-vanilla",
+    "language": "javascript",
+    "pageMode": "single-page",
+    "status": "active"
+  },
+  "deps": {
+    "packageManager": "pnpm",
+    "node": "20.x",
+    "commands": {
+      "install": "pnpm install",
+      "dev": "pnpm dev",
+      "build": "pnpm build",
+      "preview": "pnpm preview"
+    }
+  },
+  "preview": {
+    "runtime": "vite",
+    "host": "127.0.0.1",
+    "portBase": 4173,
+    "port": 4369,
+    "entry": "/",
+    "healthcheck": null,
+    "proxy": {},
+    "state": {
+      "status": "running",
+      "pid": null,
+      "startedAt": null,
+      "readyAt": null,
+      "lastStoppedAt": null,
+      "lastError": null
+    },
+    "blocking": false
+  },
+  "apis": {
+    "baseUrl": null,
+    "proxyPrefix": "/api",
+    "auth": { "type": "none", "source": "none" },
+    "endpoints": [],
+    "mockAllowed": false,
+    "blocking": false
+  },
+  "assets": {
+    "logoProvided": false,
+    "imagesRequired": [],
+    "allowPlaceholder": false,
+    "allowStock": false,
+    "allowAiImage": false,
+    "blocking": false
+  },
+  "adaptation": {
+    "targets": ["pc", "pad", "h5"],
+    "breakpoints": {
+      "h5Max": 767,
+      "padMin": 768,
+      "padMax": 1023,
+      "pcMin": 1024
+    },
+    "orientations": {
+      "padLandscapeRequired": true,
+      "h5LandscapeRequired": false
+    },
+    "interaction": {
+      "touchTargetMin": 44,
+      "hoverDependentAllowed": false
+    },
+    "blocking": false
+  },
+  "envStatus": {
+    "nodeInstalled": false,
+    "pythonInstalled": false,
+    "lastCheckedAt": null,
+    "lastPreviewAt": null,
+    "lastBuildAt": null
+  }
+}

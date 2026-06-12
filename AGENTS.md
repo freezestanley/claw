@@ -148,9 +148,30 @@
 - **mode 对账**：调度方投递任务时应携 `mode`；缺失时默认按 `new` 处理。`new` 期望干净 session，`resume:<slug>` 期望 lock 匹配；不符一律拒写并要求换 key。
 - **与其它门的关系**：SO-006 是 SO-002（锁定）的运行时守卫，位于所有写操作之前；与 SO-002a（双角色调度）叠加生效——调度负责给唯一 key，执行负责进门验 lock，双保险。
 
+### SO-007: 新建项目必须基于 templates 模版生成（禁止手写脚手架）
+
+> 目的：所有新项目统一从 `templates/` 下的模版复制生成，保证目录结构、文档骨架、脚手架一致，杜绝凭空手写项目结构、以及以「极简测试页」为由自行裁剪脚手架（如丢失 `src/lib/cookie.js`、`src/runtime/*`）导致的不一致与漏文件。
+
+- **强制基于模版**
+  - 新建任何项目时，**必须**从 `templates/<template-name>/` 复制生成项目，**禁止**自动/手写从零编写项目脚手架与项目文档骨架。
+  - 可用模版：`templates/demo-site`、`templates/vite-page`（按需求选最贴合的一个；不确定时优先 `vite-page` 单页预览模版）。
+- **生成方式（唯一命令入口，禁止手写复制）**
+  - **必须走命令脚本整目录复制**：`sh scripts/project-init.sh <slug> <template-id>`。该脚本以 `cp -R scaffold/. projects/<slug>/` 原子全量复制脚手架，再渲染 6 份项目文档与 `.webgen/config.json`，并在末尾自动调用 `project-verify-scaffold.sh` 自检。
+  - **严禁用 `write`/`edit` 逐个“模拟复制”脚手架文件**（`index.html` / `package.json` / `vite.config.js` / `src/**` / `.webgen/config.json` 等）；逐文件手写是上次丢失 `cookie.js` 的根因，一律走脚本。
+  - 仅在脚本复制 + 校验通过后，才允许在脚手架基础上改写**页面业务代码**（主要是 `src/generated/page.js` 的页面内容）；项目结构与运行时文件（`src/main.js`、`src/lib/*`、`src/runtime/*`）来自模版，**不得为“页面简单”而删减**。
+- **校验门（强制）**
+  - 复制后、写任何业务代码前，必须跑 `sh scripts/project-verify-scaffold.sh <slug> <template-id>`，退出码非 0（缺文件）时**停止并重新复制**，不得继续。
+  - 交付前再跑一次校验，确保脚手架文件清单从始至终与模版一致。
+- **禁止行为**
+  - 禁止跳过模版/脚本、直接手写 `index.html` / `package.json` / 目录结构等脚手架文件。
+  - 禁止以“测试页/页面很简单”为由删减模版自带的 `src/lib/*`、`src/runtime/*`、`main.js` 运行时链路。
+  - 模版缺少所需能力时，先反馈并按需选另一模版或请求新增模版，**不得**绕过模版自建结构。
+- **自检**：落地写操作前确认项目脚手架是由 `project-init.sh` 命令复制而来、且 `project-verify-scaffold.sh` 校验通过；若发现是手写/裁剪脚手架，停止并改为走脚本重做。
+
 ## 产出约束
 
 - 默认只创建**单页面项目**。
+- **新建项目必须基于 `templates/` 模版复制生成（见 SO-007），禁止手写脚手架。**
 - 默认只允许使用 **JavaScript**，禁止使用 TypeScript。
 - 项目页面中引用的资源文件不得为 `.ts` 或 `.tsx`，只能引用 `.js`。
 - 默认项目应支持本地 Node/Vite 预览。

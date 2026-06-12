@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hiagent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      /* hiagent 正文：在挂载容器内居中，三端无级自适应字号 */
+      .hiagent-stage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40vh;
+        min-height: 40dvh;
+        padding: 2rem 1rem;
+      }
+      .hiagent-text {
+        font-size: clamp(2.5rem, 14vw, 12rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        text-align: center;
+        background: linear-gradient(135deg, #e0f2fe 0%, #38bdf8 50%, #818cf8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-950 text-slate-50">
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
